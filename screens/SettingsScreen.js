@@ -7,6 +7,6 @@ export default class SettingsScreen extends React.Component {
   };
 
   render() {
-    return <Text>Settings Screen</Text>
+    return <Text>Settings Screen</Text>;
   }
 }
