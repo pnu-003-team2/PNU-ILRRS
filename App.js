@@ -25,6 +25,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <TextInput 
+          style={styles.ID}
           placeholder={"ID"} 
           placeholderTextColor={"#999"}
           autoCorrect={false}
@@ -33,7 +34,8 @@ export default class App extends React.Component {
           value={this.state.ID}
         />
         <TextInput 
-          placeholder={"Password1"} 
+          style={styles.PW}
+          placeholder={"Password"} 
           placeholderTextColor={"#999"}
           autoCorrect={false}
           returnKeyType={"done"}
@@ -43,6 +45,8 @@ export default class App extends React.Component {
         />
 
         <Button
+          style={styles.LogInBtn}
+          containerStyle={styles.LogInBtnContainer}
           onPress={() => {
             Alert.alert('LogIn');
           }}
@@ -97,4 +101,23 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  ID: {
+    width: "80%",
+    alignItems: "flex-start"
+  },
+  PW: {
+    width: "80%",
+    alignItems: "flex-start"
+  },
+  LogInBtn: {
+    width: "80%",
+    margin: 20
+  },
+  LogInBtnContainer : { 
+    padding: 10, 
+    height: 45, 
+    overflow: 'hidden', 
+    borderRadius: 4, 
+    backgroundColor: 'aqua' 
+  }
 });
