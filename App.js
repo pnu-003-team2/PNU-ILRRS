@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { Platform, StatusBar, StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import AppNavigator from './navigation/AppNavigator';
@@ -14,17 +14,71 @@ const instructions = Platform.select({
 });
 
 export default class App extends React.Component {
+
+  state = {
+    ID: "",
+    PW: ""
+  }
+
   render() {
+    const { ID, PW } = this.state;
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native! Ahadddh</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <AppNavigator />
+        <TextInput 
+          value={ID} 
+          placeholder={"ID"} 
+          placeholderTextColor={"#999"}
+          autoCorrect={false}
+          returnKeyType={"done"}
+          onChangeText={this._crontolID}
+          onSubmitEditing={this._addID}
+        />
+        <TextInput 
+          value={PW} 
+          placeholder={"Password"} 
+          placeholderTextColor={"#999"}
+          autoCorrect={false}
+          returnKeyType={"done"}
+          onChangeText={this._crontolPW}
+          onSubmitEditing={this._addPW}
+        />
+
+        <Button
+          onPress={() => {
+            Alert.alert('LogIn');
+          }}
+          title="LogIn"
+          color="#841584"
+        />
+
       </View>
     );
   }
+
+  _crontolID = text=>{
+    this.setState({
+      ID: text
+    })
+  };
+
+  _crontolPW = text=>{
+    this.setState({
+      PW: text
+    })
+  };
+
+  _addID = text => {
+    this.setState({
+      ID: text
+    })
+  };
+
+  _addPW = text => {
+    this.setState({
+      PW: text
+    })
+  };
+
 }
 
 const styles = StyleSheet.create({
