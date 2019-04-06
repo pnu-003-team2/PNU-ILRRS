@@ -1,9 +1,7 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { Platform, TouchableOpacity, StatusBar, StyleSheet, Text,TextInput, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-
 import AppNavigator from './navigation/AppNavigator';
-
 Icon.loadFont();
 
 const instructions = Platform.select({
@@ -14,16 +12,39 @@ const instructions = Platform.select({
 });
 
 export default class App extends React.Component {
+  state = {
+    id :"",
+    password:"",
+  }
   render() {
+    const {id,password} = this.state;
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcomedsf to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <AppNavigator />
-      </View>
+        <View style = {styles.container}>
+          <TextInput
+            style = {styles.inputBox}
+            placeholder = "id"
+           // value = {this.state.id}
+            onChangeText = {(text) => this.setState({id:text})}
+            placeholderTextColor = "rgba(255,255,255,0.7)">
+          </TextInput>
+          <TextInput
+            style = {styles.inputBox}
+            placeholder = "password"
+           // value = {this.state.password}
+            onChangeText = {(text) => this.setState({password:text})}
+            placeholderTextColor = "rgba(255,255,255,0.7)">
+          </TextInput>
+          <TouchableOpacity 
+            style = {styles.LoginButton}
+            onPress = {this.LoginCheck}>
+            <Text style={styles.buttonText}>LOGIN</Text>
+          </TouchableOpacity>
+        </View>
     );
+  }
+  LoginCheck = () =>{
+    const {id,password} = this.state;
+    alert("id:"+ this.state.id +" password:" +this.state.password);
   }
 }
 
@@ -31,17 +52,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'white',
+    alignItems: 'center'
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 50,
+  inputBox:{
+    width: 300,
+    height : 40,
+    backgroundColor : "#1b89ea",
+    opacity : 0.5,
+    borderRadius : 20,
+    marginBottom: 10,
+    paddingHorizontal : 20
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  LoginButton:{
+    width: 300,
+    height : 40,
+    backgroundColor : "#1b89ea",
+    borderRadius : 20,
   },
+  buttonText : {
+    textAlign: "center",
+    color:"white",
+    fontWeight : '700',
+    fontSize: 15,
+    paddingTop: 8
+  }
 });
