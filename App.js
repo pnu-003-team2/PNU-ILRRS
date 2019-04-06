@@ -25,22 +25,21 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <TextInput 
-          value={ID} 
           placeholder={"ID"} 
           placeholderTextColor={"#999"}
           autoCorrect={false}
           returnKeyType={"done"}
-          onChangeText={this._crontolID}
-          onSubmitEditing={this._addID}
+          onChangeText={(text) => this.setState({ID: text})}
+          value={this.state.ID}
         />
         <TextInput 
-          value={PW} 
-          placeholder={"Password"} 
+          placeholder={"Password1"} 
           placeholderTextColor={"#999"}
           autoCorrect={false}
           returnKeyType={"done"}
-          onChangeText={this._crontolPW}
-          onSubmitEditing={this._addPW}
+          onChangeText={(text) => this.setState({PW: text})}
+          value={this.state.PW}
+          secureTextEntry = {true}
         />
 
         <Button
