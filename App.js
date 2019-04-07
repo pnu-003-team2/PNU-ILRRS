@@ -24,7 +24,7 @@ export default class App extends React.Component {
         <View style = {styles.container}>
           <View style={styles.inputWrap}>
             <View style={styles.iconWrap}>
-              <Image source={idIcon} style={styles.icon} resizeMode="contain" />
+              <Image source={idIcon} style={styles.icon} resizeMode='contain' />
             </View>
             <TextInput style = {styles.inputBox}
               placeholder = 'id'
@@ -36,7 +36,7 @@ export default class App extends React.Component {
 
           <View style={styles.inputWrap}>
             <View style={styles.iconWrap}>
-              <Image source={pwIcon} style={styles.icon} resizeMode="contain" />
+              <Image source={pwIcon} style={styles.icon} resizeMode='contain' />
             </View>
             <TextInput style = {styles.inputBox}
               placeholder = 'password'
@@ -71,7 +71,7 @@ export default class App extends React.Component {
   async buttonClick () {
     const receivetoken = await this.requestToken();
     this.setState({token: receivetoken});
-    //alert(receivetoken);
+    alert(receivetoken);
   }
 
 }
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     width: 340,
     height: 40,
     marginTop: 20,
-    backgroundColor : 'gray',
+    backgroundColor : 'red',
   },
   buttonText : {
     textAlign: 'center',
