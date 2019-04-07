@@ -23,14 +23,14 @@ export default class App extends React.Component {
           <TextInput
             style = {styles.inputBox}
             placeholder = "id"
-           // value = {this.state.id}
+            //value = {this.state.id}
             onChangeText = {(text) => this.setState({id:text})}
             placeholderTextColor = "rgba(255,255,255,0.7)">
           </TextInput>
           <TextInput
             style = {styles.inputBox}
             placeholder = "password"
-           // value = {this.state.password}
+           //value = {this.state.password}
             onChangeText = {(text) => this.setState({password:text})}
             placeholderTextColor = "rgba(255,255,255,0.7)">
           </TextInput>
