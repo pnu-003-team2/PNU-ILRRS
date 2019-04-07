@@ -1,4 +1,5 @@
 import React from 'react';
+import Login from './logins.js'
 import { Platform, StatusBar, StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -17,29 +18,28 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <AppNavigator />
+        <Login/>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+   container: {
+      flex: 1,
+      justifyContent:'center',
+   },
+  mainLogo: {
+    color: '#f8c224',
+    fontSize: 70,
+    backgroundColor: '#000000',
   },
-  welcome: {
-    fontSize: 20,
+  editHeader: {
+    fontSize: 40,
+    color: '#ffffff',
     textAlign: 'center',
-    margin: 50,
   },
-  instructions: {
+  editText: {
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
