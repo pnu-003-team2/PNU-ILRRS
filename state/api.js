@@ -47,6 +47,41 @@ export function fakeApi(path, options) {
   switch (path) {
     case '/user/login':
       return deferred({ data: 'Token' });
+    case '/course':
+      return deferred({
+        data: [
+          {
+            id: 0,
+            uni_name: '부산대학교',
+            depart_code: '10',
+            depart_name: '전기컴퓨터공학부',
+            class_code: 'CP10313',
+            class_name: '운영체제',
+            class_eng_name: 'Operating System',
+            class_division: '063',
+            professor_depart: 'professor_depart',
+            professor_name: 'professor_name',
+            limit_person: 50,
+            time_table: '13:30-14:45',
+            liberal_name: 'liberal_name',
+          },
+          {
+            id: 1,
+            uni_name: '부산대학교',
+            depart_code: '10',
+            depart_name: '전기컴퓨터공학부',
+            class_code: 'CP10314',
+            class_name: '인공지능',
+            class_eng_name: 'Artificial Intelligence',
+            class_division: '061',
+            professor_depart: 'professor_depart',
+            professor_name: 'professor_name',
+            limit_person: 50,
+            time_table: '15:00-16:15',
+            liberal_name: 'liberal_name',
+          }
+        ]
+      })
     default:
       throw new Error('fakeApi: Unexpected path');
   }
