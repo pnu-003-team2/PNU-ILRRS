@@ -43,7 +43,7 @@ export function loginFailure(error) {
  */
 export const login = (id, password) => (dispatch, getState) => {
   if (isInLogin(getState())) {
-    return Promise.reject();
+    return Promise.reject(new Error('로그인 요청 중 입니다.'));
   }
 
   dispatch(loginRequest(id, password));
