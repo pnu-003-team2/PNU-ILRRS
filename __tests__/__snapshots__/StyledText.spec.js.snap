@@ -14,18 +14,3 @@ exports[`<StyledText /> should renders <HelveticaText /> correctly 1`] = `
   Test
 </Text>
 `;
-
-exports[`<StyledText /> should renders <MonoText /> correctly 1`] = `
-<Text
-  style={
-    Array [
-      undefined,
-      Object {
-        "fontFamily": "space-mono",
-      },
-    ]
-  }
->
-  Test
-</Text>
-`;

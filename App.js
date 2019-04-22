@@ -1,8 +1,11 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { Platform, StatusBar, StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import AppNavigator from './navigation/AppNavigator';
+import configureStore from './state/configure-store';
+import Counter from './containers/Counter';
 
 Icon.loadFont();
 
@@ -13,16 +16,21 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
+const store = configureStore();
+
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <AppNavigator />
-      </View>
+      <Provider store={store}>
+        <View style={styles.container}>
+          <Text style={styles.welcome}>Welcome to React Native!</Text>
+          <Text style={styles.instructions}>To get started, edit App.js</Text>
+          <Text style={styles.instructions}>{instructions}</Text>
+          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+          <AppNavigator />
+          <Counter />
+        </View>
+      </Provider>
     );
   }
 }
