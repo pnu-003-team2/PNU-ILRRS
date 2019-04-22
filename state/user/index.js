@@ -41,7 +41,7 @@ export function loginFailure(error) {
  * @param {number} id
  * @param {string} password
  */
-export const login = (id, password) => (dispatch, getState) => {
+export const login = (id, password) => async (dispatch, getState) => {
   if (isInLogin(getState())) {
     return Promise.reject(new Error('로그인 요청 중 입니다.'));
   }
@@ -51,19 +51,20 @@ export const login = (id, password) => (dispatch, getState) => {
   /**
    * @todo Remove this fake API mocking
    */
-  return fakeApi('/user/login', {
-    method: 'POST',
-    body: {
-      id,
-      password,
-    },
-  }).then((response) => {
+  try {
+    const response = await fakeApi('/user/login', {
+      method: 'POST',
+      body: {
+        id,
+        password,
+      },
+    });
     dispatch(loginSuccess(response));
     return response.data;
-  }, (error) => {
+  } catch (error) {
     dispatch(loginFailure(error));
     return Promise.reject(error);
-  })
+  }
 };
 
 export function reducer(state = {}, action) {
