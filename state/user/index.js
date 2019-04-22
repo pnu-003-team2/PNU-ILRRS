@@ -1,4 +1,4 @@
-import api from '../api';
+import api, { fakeApi } from '../api';
 
 export const USER_LOGIN_REQUEST = 'USER_LOGIN_REQUEST';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
@@ -48,7 +48,10 @@ export const login = (id, password) => (dispatch, getState) => {
 
   dispatch(loginRequest(id, password));
 
-  return api('/user/login', {
+  /**
+   * @todo Remove this fake API mocking
+   */
+  return fakeApi('/user/login', {
     method: 'POST',
     body: {
       id,
