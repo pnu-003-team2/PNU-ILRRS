@@ -5,7 +5,6 @@ const ROOT = 'https://76c53d09.ap.ngrok.io';
 /**
  *
  * @param {string} path
- * @param {object} data
  * @param {object} options
  */
 export default function api(path, options) {

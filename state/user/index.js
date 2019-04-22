@@ -48,14 +48,15 @@ export const login = (id, password) => (dispatch, getState) => {
 
   dispatch(loginRequest(id, password));
 
-  return api('/user', {
+  return api('/user/login', {
     method: 'POST',
     body: {
       id,
       password,
     },
-  }).then((data) => {
-    dispatch(loginSuccess(data));
+  }).then((response) => {
+    dispatch(loginSuccess(response));
+    return response.data;
   }, (error) => {
     dispatch(loginFailure(error));
     return Promise.reject(error);
