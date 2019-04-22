@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 
 import { HelveticaText } from '../components/StyledText';
-import Counter from '../containers/Counter';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -51,7 +50,6 @@ export default class HomeScreen extends React.Component {
             <HelveticaText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</HelveticaText>
           </View>
         </View>
-        <Counter />
       </View>
     );
   }
