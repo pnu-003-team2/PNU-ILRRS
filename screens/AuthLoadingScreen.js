@@ -1,0 +1,28 @@
+import React from 'react';
+import {
+  ActivityIndicator,
+  View,
+} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+
+class AuthLoadingScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.bootstrapAsync();
+  }
+
+  bootstrapAsync = async () => {
+    const userToken = await AsyncStorage.getItem('userToken');
+    this.props.navigation.navigate(userToken ? 'Main' : 'Auth');
+  };
+
+  render() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center' }}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
+}
+
+export default AuthLoadingScreen;

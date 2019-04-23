@@ -1,4 +1,4 @@
-import api from '../api';
+import api, { fakeApi } from '../api';
 
 export const USER_LOGIN_REQUEST = 'USER_LOGIN_REQUEST';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
@@ -41,25 +41,30 @@ export function loginFailure(error) {
  * @param {number} id
  * @param {string} password
  */
-export const login = (id, password) => (dispatch, getState) => {
+export const login = (id, password) => async (dispatch, getState) => {
   if (isInLogin(getState())) {
-    return Promise.reject();
+    return Promise.reject(new Error('로그인 요청 중 입니다.'));
   }
 
   dispatch(loginRequest(id, password));
 
-  return api('/user', {
-    method: 'POST',
-    body: {
-      id,
-      password,
-    },
-  }).then((data) => {
-    dispatch(loginSuccess(data));
-  }, (error) => {
+  /**
+   * @todo Remove this fake API mocking
+   */
+  try {
+    const response = await fakeApi('/user/login', {
+      method: 'POST',
+      data: {
+        id,
+        password,
+      },
+    });
+    dispatch(loginSuccess(response));
+    return response.data.jwtToken;
+  } catch (error) {
     dispatch(loginFailure(error));
     return Promise.reject(error);
-  })
+  }
 };
 
 export function reducer(state = {}, action) {
