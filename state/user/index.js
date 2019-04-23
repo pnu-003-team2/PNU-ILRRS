@@ -54,13 +54,13 @@ export const login = (id, password) => async (dispatch, getState) => {
   try {
     const response = await fakeApi('/user/login', {
       method: 'POST',
-      body: {
+      data: {
         id,
         password,
       },
     });
     dispatch(loginSuccess(response));
-    return response.data;
+    return response.data.jwtToken;
   } catch (error) {
     dispatch(loginFailure(error));
     return Promise.reject(error);

@@ -28,8 +28,8 @@ class LoginScreen extends React.Component {
   signIn = async () => {
     try {
       const { studentId, password } = this.state;
-      const data = await this.props.onLogin(studentId, password);
-      await AsyncStorage.setItem('userToken', data);
+      const token = await this.props.onLogin(studentId, password);
+      await AsyncStorage.setItem('userToken', token);
       this.props.navigation.navigate('Main');
     } catch (error) {
       const message = error.message || '잠시 후 다시 시도해주세요.';

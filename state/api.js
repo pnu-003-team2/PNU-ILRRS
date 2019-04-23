@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const ROOT = 'https://76c53d09.ap.ngrok.io';
+const ROOT = 'http://707431bb.ap.ngrok.io';
 
 /**
  *
@@ -46,7 +46,7 @@ const deferred = (params) =>
 export function fakeApi(path, options) {
   switch (path) {
     case '/user/login':
-      return deferred({ data: 'Token' });
+      return deferred({ data: { jwtToken: 'token' } });
     case '/course':
       return deferred({
         data: [
