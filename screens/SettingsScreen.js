@@ -1,12 +1,21 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { AsyncStorage, Button, View } from 'react-native';
 
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
-    title: 'app.json',
+    title: '설정',
   };
 
+  signOut = async () => {
+    await AsyncStorage.removeItem('userToken');
+    this.props.navigation.navigate('Auth');
+  }
+
   render() {
-    return <Text>Settings Screen</Text>;
+    return (
+      <View>
+        <Button title="로그아웃" onPress={this.signOut} />
+      </View>
+    );
   }
 }
