@@ -1,5 +1,6 @@
 import React from 'react';
-import { AsyncStorage, Button, View } from 'react-native';
+import { Button, View } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {

@@ -2,13 +2,13 @@ import React from 'react';
 import {
   ActivityIndicator,
   Alert,
-  AsyncStorage,
   Button,
   StyleSheet,
   Text,
   TextInput,
   View,
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
 
 import { isInLogin, login } from '../state/user';
