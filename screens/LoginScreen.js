@@ -5,12 +5,13 @@ import {
   Button,
   StyleSheet,
   Text,
-  TextInput,
   View,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
 
+import RelativeText from '../components/RelativeText';
+import RelativeTextInput from '../components/RelativeTextInput';
 import { isInLogin, login } from '../state/user';
 
 class LoginScreen extends React.Component {
@@ -70,21 +71,19 @@ class LoginScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>강의톡</Text>
-        <TextInput
-          autoCapitalize="none"
-          style={styles.textInput}
+        <RelativeTextInput
           placeholder="학번"
+          widthPercent={80}
           onChangeText={this.handleStudentIdChange}
         />
-        {!!studentIdError && <Text style={styles.errorMessage}>{studentIdError}</Text>}
-        <TextInput
-          autoCapitalize="none"
-          secureTextEntry
-          style={styles.textInput}
+        <RelativeText>{studentIdError}</RelativeText>
+        <RelativeTextInput
           placeholder="비밀번호"
+          secureTextEntry
+          widthPercent={80}
           onChangeText={this.handlePasswordChange}
         />
-        {!!passwordError && <Text style={styles.errorMessage}>{passwordError}</Text>}
+        <RelativeText>{passwordError}</RelativeText>
         {isInLogin && <ActivityIndicator size="large" color="#0000ff" />}
         {!isInLogin && (
           <Button
@@ -110,22 +109,6 @@ const styles = StyleSheet.create({
     fontSize: 40,
     marginTop: '45%',
     marginBottom: 50,
-  },
-  textInput: {
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
-    borderBottomLeftRadius: 5,
-    borderBottomRightRadius: 5,
-    marginBottom: 10,
-    padding: 10,
-    height: 40,
-    width: '80%'
-  },
-  errorMessage: {
-    width: '80%',
-    marginBottom: 15,
   },
 });
 
