@@ -1,4 +1,4 @@
-import api, { fakeApi } from '../api';
+import { fakeApi } from '../api';
 
 export const USER_LOGIN_REQUEST = 'USER_LOGIN_REQUEST';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
@@ -50,7 +50,7 @@ export const login = (id, password) => async (dispatch, getState) => {
   dispatch(loginRequest(id, password));
 
   try {
-    const response = await api('/user/login', {
+    const response = await fakeApi('/user/login', {
       method: 'POST',
       data: {
         id,

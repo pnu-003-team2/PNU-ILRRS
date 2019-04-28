@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import api from '../api';
+import { fakeApi } from '../api';
 
 export const COURSE_LOAD_REQUEST = 'COURSE_LOAD_REQUEST';
 export const COURSE_LOAD_SUCCESS = 'COURSE_LOAD_SUCCESS';
@@ -35,7 +35,7 @@ export const loadCourse = () => async (dispatch, getState) => {
   dispatch(loadCourseRequest());
 
   try {
-    const { data } = await api('/course', { credentials: true });
+    const { data } = await fakeApi('/course', { credentials: true });
     dispatch(loadCourseSuccess(data));
   } catch (error) {
     dispatch(loadCourseFailure(error));
