@@ -1,30 +1,45 @@
 import axios from 'axios';
+import camelcaseKeys from 'camelcase-keys';
+import AsyncStorage from '@react-native-community/async-storage';
 
-const ROOT = 'http://707431bb.ap.ngrok.io';
+const ROOT = 'http://cbbeb9c0.ap.ngrok.io';
 
 /**
  *
  * @param {string} path
  * @param {object} options
  */
-export default function api(path, options) {
+export default async function api(path, options) {
   if (!path.startsWith('/')) {
     throw new Error('API path must start with "/"');
   }
 
-  const {
+  let {
+    credentials = false,
+    headers,
     method = 'GET',
     ...restOptions
   } = options;
 
+  headers = { Accept: 'application/json' };
+
+  if (credentials) {
+    const token = await AsyncStorage.getItem('userToken');
+    headers = {
+      ...headers,
+      Authorization: `Bearer ${token}`,
+    };
+  }
+
   return axios({
     method,
-    headers: {
-      Accept: 'application/json',
-    },
+    headers,
     url: ROOT + path,
     ...restOptions
-  });
+  }).then((response) => ({
+    ...response,
+    data: camelcaseKeys(response.data, { deep: true }),
+  }));
 }
 
 

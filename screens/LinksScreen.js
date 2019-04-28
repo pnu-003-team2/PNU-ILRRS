@@ -1,7 +1,9 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 
-export default class LinksScreen extends React.Component {
+import CourseListContainer from '../containers/CourseListContainer';
+
+class LinksScreen extends React.Component {
   static navigationOptions = {
     title: 'Links',
   };
@@ -9,7 +11,7 @@ export default class LinksScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Text>Links Screen</Text>
+        <CourseListContainer />
       </ScrollView>
     );
   }
@@ -22,3 +24,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
+
+export default LinksScreen;

@@ -1,4 +1,6 @@
-import { fakeApi } from '../api';
+import { combineReducers } from 'redux';
+
+import api from '../api';
 
 export const COURSE_LOAD_REQUEST = 'COURSE_LOAD_REQUEST';
 export const COURSE_LOAD_SUCCESS = 'COURSE_LOAD_SUCCESS';
@@ -30,11 +32,10 @@ export const loadCourse = () => async (dispatch, getState) => {
     return Promise.reject(new Error('강의를 가져오고 있습니다.'));
   }
 
-  /**
-   * @todo Remove this fake API mocking
-   */
+  dispatch(loadCourseRequest());
+
   try {
-    const { data } = await fakeApi('/course');
+    const { data } = await api('/course', { credentials: true });
     dispatch(loadCourseSuccess(data));
   } catch (error) {
     dispatch(loadCourseFailure(error));
@@ -42,22 +43,45 @@ export const loadCourse = () => async (dispatch, getState) => {
   }
 }
 
-export function reducer(state = {}, action) {
+function byId(state = {}, action) {
   switch (action.type) {
-    case COURSE_LOAD_REQUEST:
-      return {
-        ...state,
-        isCourseLoading: true,
-      };
     case COURSE_LOAD_SUCCESS:
-    case COURSE_LOAD_FAILURE:
-      return {
-        ...state,
-        isCourseLoading: false,
-      };
+      const newState = {};
+      action.payload.forEach((course) => {
+        newState[course.id] = course;
+      });
+      return newState;
     default:
       return state;
   }
 }
 
+function ids(state = [], action) {
+  switch (action.type) {
+    case COURSE_LOAD_SUCCESS:
+      return action.payload.map(course => course.id);
+    default:
+      return state;
+  }
+}
+
+function isCourseLoadingReducer(state = false, action) {
+  switch (action.type) {
+    case COURSE_LOAD_REQUEST:
+      return true;
+    case COURSE_LOAD_SUCCESS:
+    case COURSE_LOAD_FAILURE:
+      return false;
+    default:
+      return state;
+  }
+}
+
+export const reducer = combineReducers({
+  byId,
+  ids,
+  isCourseLoading: isCourseLoadingReducer,
+})
+
 export const isCourseLoading = state => state.course.isCourseLoading;
+export const getCourses = state => state.course.ids.map(id => state.course.byId[id]);
