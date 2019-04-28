@@ -12,6 +12,8 @@ export default class SettingsScreen extends React.Component {
     this.props.navigation.navigate('Auth');
   }
 
+  
+
   render() {
     return (
       <View>
