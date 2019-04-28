@@ -1,4 +1,4 @@
-import api, { fakeApi } from '../api';
+import { fakeApi } from '../api';
 
 export const USER_LOGIN_REQUEST = 'USER_LOGIN_REQUEST';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
@@ -19,9 +19,10 @@ export function loginRequest(id, password) {
   };
 }
 
-export function loginSuccess() {
+export function loginSuccess(payload) {
   return {
     type: USER_LOGIN_SUCCESS,
+    payload,
   };
 }
 
@@ -48,9 +49,6 @@ export const login = (id, password) => async (dispatch, getState) => {
 
   dispatch(loginRequest(id, password));
 
-  /**
-   * @todo Remove this fake API mocking
-   */
   try {
     const response = await fakeApi('/user/login', {
       method: 'POST',
@@ -59,7 +57,7 @@ export const login = (id, password) => async (dispatch, getState) => {
         password,
       },
     });
-    dispatch(loginSuccess(response));
+    dispatch(loginSuccess(response.data));
     return response.data.jwtToken;
   } catch (error) {
     dispatch(loginFailure(error));
@@ -75,6 +73,11 @@ export function reducer(state = {}, action) {
         isInLogin: true,
       };
     case USER_LOGIN_SUCCESS:
+      return {
+        ...state,
+        isInLogin: false,
+        jwtToken: action.payload.jwtToken,
+      };
     case USER_LOGIN_FAILURE:
       return {
         ...state,
@@ -86,3 +89,4 @@ export function reducer(state = {}, action) {
 }
 
 export const isInLogin = state => state.user.isInLogin;
+export const getToken = state => state.user.jwtToken;
