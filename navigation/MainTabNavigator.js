@@ -6,7 +6,6 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import CalendarScreen from '../screens/CalendarScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import CourseListScreen from '../screens/CourseListScreen';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -54,24 +53,8 @@ SettingsStack.navigationOptions = {
   ),
 };
 
-const CourseListStack = createStackNavigator({
-  CourseList: CourseListScreen,
-});
-
-CourseListStack.navigationOptions = {
-  tabBarLabel: '강의목록',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-    />
-  ),
-};
-
-
 export default createBottomTabNavigator({
   HomeStack,
   CalendarStack,
-  CourseListStack,
   SettingsStack,
 });
