@@ -1,19 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  FlatList,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 
-
-function SepearatedText({ timeTable }) {
-  let [firstLine,secondLine] = timeTable.split(',',2);
-  
-  return (
-    <View>
-      <Text>{firstLine}</Text>
-      <Text>{secondLine}</Text>
-    </View>
-  );
-}
-
+import SeperatedText from '../components/SeperatedText';
 
 const propTypes = {
   courses: PropTypes.arrayOf(PropTypes.shape({
@@ -29,22 +24,24 @@ const defaultProps = {
   courses: [],
 };
 
-function CourseList({ courses }) {
+function CourseList({ courses, onPress }) {
   return (
     <FlatList
       data={courses.map(course => ({ ...course, key: course.id.toString() }))}
       renderItem={({ item }) => (
-        <View style={styles.course}>
-          <View style={styles.coureLeftView}>
-            <Text style={[styles.titleText, styles.bottomPadding]}>{item.className}</Text>
-            <Text style={item.classDivision.includes('전공') ? [styles.redText,styles.bottomPadding] : [styles.grayText,styles.bottomPadding]}>{item.classDivision}</Text>
-            <Text style={[styles.codeText]}>{item.code} 분반</Text>
-            <SepearatedText timeTable={item.timeTable}/>
-          </View >
-          <View style={styles.courseRightView}>
-            <Text style={styles.professorNameText}>{item.professorName} 교수님</Text>
+        <TouchableWithoutFeedback onPress={onPress}>
+          <View style={styles.course}>
+            <View style={styles.coureLeftView}>
+              <Text style={[styles.titleText, styles.bottomPadding]}>{item.className}</Text>
+              <Text style={item.classDivision.includes('전공') ? [styles.redText,styles.bottomPadding] : [styles.grayText,styles.bottomPadding]}>{item.classDivision}</Text>
+              <Text style={[styles.codeText]}>{item.code} 분반</Text>
+              <SeperatedText timeTable={item.timeTable}/>
+            </View >
+            <View style={styles.courseRightView}>
+              <Text style={styles.professorNameText}>{item.professorName} 교수님</Text>
+            </View>
           </View>
-        </View>
+        </TouchableWithoutFeedback>
       )}
     />
   );
@@ -96,4 +93,3 @@ const styles = StyleSheet.create({
 CourseList.propTypes = propTypes;
 CourseList.defaultProps = defaultProps;
 export default CourseList;
-

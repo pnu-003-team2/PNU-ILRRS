@@ -3,15 +3,19 @@ import { ScrollView, StyleSheet } from 'react-native';
 
 import CourseListContainer from '../containers/CourseListContainer';
 
-class LinksScreen extends React.Component {
+class HomeScreen extends React.Component {
   static navigationOptions = {
     title: 'Home',
   };
 
+  navigateToChat = () => {
+    this.props.navigation.navigate('Chat');
+  }
+
   render() {
     return (
       <ScrollView style={styles.container}>
-        <CourseListContainer />
+        <CourseListContainer onPress={this.navigateToChat} />
       </ScrollView>
     );
   }
@@ -25,4 +29,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LinksScreen;
+export default HomeScreen;
