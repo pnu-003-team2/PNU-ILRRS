@@ -28,7 +28,8 @@ class CourseListContainer extends React.Component {
   }
 
   render() {
-    return <CourseList courses={this.props.courses} />;
+    const { courses, ...rest } = this.props;
+    return <CourseList {...rest} courses={courses} />;
   }
 }
 
