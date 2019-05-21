@@ -39,5 +39,10 @@
     "npm-check-updates": "^3.1.4",
     "react-native-testing-library": "^1.6.1",
     "react-test-renderer": "16.8.3"
+  },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/"
+    ]
   }
 }
