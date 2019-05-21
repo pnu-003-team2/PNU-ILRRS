@@ -9,14 +9,15 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
+import { SafeAreaView } from 'react-navigation';
 
-import RelativeText from '../components/RelativeText';
-import RelativeTextInput from '../components/RelativeTextInput';
 import { isInLogin, login } from '../state/user';
+import AirbnbTextInput from '../components/AirbnbTextInput';
 
 class LoginScreen extends React.Component {
+
   static navigationOptions = {
-    title: '로그인',
+    header: null,
   };
 
   state = {
@@ -69,21 +70,28 @@ class LoginScreen extends React.Component {
     const { studentIdError, passwordError } = this.state;
     const { isInLogin } = this.props;
     return (
-      <View style={styles.container}>
-        <Text style={styles.title}>강의톡</Text>
-        <RelativeTextInput
-          placeholder="학번"
-          widthPercent={80}
-          onChangeText={this.handleStudentIdChange}
-        />
-        <RelativeText>{studentIdError}</RelativeText>
-        <RelativeTextInput
-          placeholder="비밀번호"
-          secureTextEntry
-          widthPercent={80}
-          onChangeText={this.handlePasswordChange}
-        />
-        <RelativeText>{passwordError}</RelativeText>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.greetingContainer}>
+          <Text style={styles.upperGreeting}>환영합니다.</Text>
+          <Text style={styles.underGreeting}>아래에 정보를 입력하세요!</Text>
+        </View>
+        <View style={styles.inputContainer}>
+          <AirbnbTextInput
+            style={styles.studentNoInput}
+            placeholder="학번"
+            value={this.state.studentId}
+            onChangeText={this.handleStudentIdChange}
+          />
+          <Text>{studentIdError}</Text>
+          <AirbnbTextInput
+            style={styles.passwordInput}
+            placeholder="비밀번호"
+            value={this.state.password}
+            onChangeText={this.handlePasswordChange}
+          />
+          <Text>{passwordError}</Text>
+        </View>
+        
         {isInLogin && <ActivityIndicator size="large" color="#0000ff" />}
         {!isInLogin && (
           <Button
@@ -92,7 +100,7 @@ class LoginScreen extends React.Component {
             onPress={this.signIn}
           />
         )}
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -100,15 +108,30 @@ class LoginScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    padding: 10,
   },
-  title: {
-    fontWeight: 'bold',
+  greetingContainer: {
+    paddingVertical: 90,
+    paddingHorizontal: 40,
+  },
+  upperGreeting: {
+    marginBottom: 7,
     fontSize: 40,
-    marginTop: '45%',
-    marginBottom: 50,
+    fontFamily: 'Roboto-Bold',
+    color: '#404040',
+  },
+  underGreeting: {
+    fontSize: 23,
+    fontFamily: 'Roboto-Regular',
+    color: '#4B4B4B',
+  },
+  inputContainer: {
+    height: 180,
+    flexDirection: 'column',
+    paddingLeft: 30,
+    justifyContent: 'space-between',
+  },
+  Input: {
+    
   },
 });
 
