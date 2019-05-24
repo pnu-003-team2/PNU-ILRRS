@@ -1,28 +1,38 @@
-import React from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { loadUser } from '../state/user/actions';
+import { getUserId } from '../state/user/selectors';
 
-class FetchUserData extends React.Component {
-  static propTypes = {
-    onLoad: PropTypes.func,
-  };
-  static defaultProps = {
-    onLoad() {},
-  };
+const propTypes = {
+  userId: PropTypes.number,
+  onLoad: PropTypes.func,
+};
 
-  componentDidMount() {
-    this.props.onLoad();
-  }
+const defaultProps = {
+  userId: null,
+  onLoad() {},
+};
 
-  render() {
-    return null;
-  }
+function FetchUserData({ userId, onLoad }) {
+  useEffect(() => {
+    if (userId) {
+      onLoad();
+    }
+  }, [userId]);
+  return null;
 }
+
+FetchUserData.propTypes = propTypes;
+FetchUserData.defaultProps = defaultProps;
+
+const mapStateToProps = (state) => ({
+  userId: getUserId(state),
+});
 
 const mapDispatchToProps = {
   onLoad: loadUser,
 };
 
-export default connect(null, mapDispatchToProps)(FetchUserData);
+export default connect(mapStateToProps, mapDispatchToProps)(FetchUserData);
