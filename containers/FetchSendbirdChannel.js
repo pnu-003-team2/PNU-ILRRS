@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { getCourseSendbirdChannelUrl } from '../state/course';
-import { fetchChannelRequest } from '../state/sendbird';
+import { fetchChannelRequest } from '../state/sendbird/actions';
 
 class FetchSendbirdChannel extends React.Component {
   static propTypes = {

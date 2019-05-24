@@ -4,7 +4,8 @@ import { Alert } from 'react-native';
 import { connect } from 'react-redux';
 
 import CourseList from '../components/CourseList';
-import { getCourses, loadCourse } from '../state/course';
+import { getCourses } from '../state/course';
+import { loadCourse } from '../state/course/actions';
 
 const propTypes = {
   courses: PropTypes.array,

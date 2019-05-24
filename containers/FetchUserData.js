@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { loadUser } from '../state/user';
+import { loadUser } from '../state/user/actions';
 
 class FetchUserData extends React.Component {
   static propTypes = {

@@ -9,36 +9,13 @@ import {
   SENDBIRD_CONNECT_FAILURE,
 } from '../action-types';
 import {
-  getSendbirdAccessToken,
-  getUserId,
-} from '../user';
+  connectSendbirdSuccess,
+  connectSendbirdFailure,
+  fetchChannelSuccess,
+  fetchChannelFailure,
+} from './actions';
 
 const sb = new SendBird({ appId: '' });
-
-const connectSendbirdRequest = (userId, sendbirdAccessToken) => ({
-  type: SENDBIRD_CONNECT_REQUEST,
-  payload: {
-    userId,
-    sendbirdAccessToken,
-  },
-});
-
-const connectSendbirdSuccess = user => ({
-  type: SENDBIRD_CONNECT_SUCCESS,
-  payload: user,
-});
-
-const connectSendbirdFailure = error => ({
-  type: SENDBIRD_CONNECT_FAILURE,
-  payload: error,
-  error: true,
-});
-
-export const connectSendbird = () => (dispatch, getState) => {
-  const userId = getUserId(getState());
-  const sendbirdAccessToken = getSendbirdAccessToken(getState());
-  dispatch(connectSendbirdRequest(userId, sendbirdAccessToken));
-};
 
 export const sendbirdConnectionMiddleware = () => next => (action) => {
   if (action.type !== SENDBIRD_CONNECT_REQUEST) {
@@ -56,22 +33,6 @@ export const sendbirdConnectionMiddleware = () => next => (action) => {
     }
   });
 };
-
-export const fetchChannelRequest = (channelUrl) => ({
-  type: SENDBIRD_CHANNEL_FETCH_REQUEST,
-  payload: channelUrl,
-});
-
-export const fetchChannelSuccess = (payload) => ({
-  type: SENDBIRD_CHANNEL_FETCH_SUCCESS,
-  payload,
-});
-
-export const fetchChannelFailure = (error) => ({
-  type: SENDBIRD_CHANNEL_FETCH_FAILURE,
-  payload: error,
-  error: true,
-});
 
 export const sendbirdChannelMiddleware = () => next => (action) => {
   if (action.type !== SENDBIRD_CHANNEL_FETCH_REQUEST) {
@@ -92,10 +53,22 @@ export const sendbirdChannelMiddleware = () => next => (action) => {
 const initialState = {
   connected: false,
   isConnecting: false,
+  isChannelFetcting: false,
 };
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case SENDBIRD_CHANNEL_FETCH_REQUEST:
+      return {
+        ...state,
+        isChannelFetcting: true,
+      };
+    case SENDBIRD_CHANNEL_FETCH_SUCCESS:
+    case SENDBIRD_CHANNEL_FETCH_FAILURE:
+      return {
+        ...state,
+        isChannelFetcting: true,
+      };
     case SENDBIRD_CONNECT_REQUEST:
       return {
         ...state,
