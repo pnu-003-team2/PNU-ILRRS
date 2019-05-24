@@ -1,8 +1,32 @@
 import { fakeApi } from '../api';
 
+export const USER_DATA_REQUEST = 'USER_DATA_REQUEST';
+export const USER_DATA_SUCCESS = 'USER_DATA_SUCCESS';
+export const USER_DATA_FAILURE = 'USER_DATA_FAILURE';
 export const USER_LOGIN_REQUEST = 'USER_LOGIN_REQUEST';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
 export const USER_LOGIN_FAILURE = 'USER_LOGIN_FAILURE';
+
+export function loadUserRequest() {
+  return {
+    type: USER_DATA_REQUEST,
+  };
+}
+
+export function loadUserSuccess(payload) {
+  return {
+    type: USER_DATA_SUCCESS,
+    payload,
+  };
+}
+
+export function loadUserFailure(error) {
+  return {
+    type: USER_DATA_FAILURE,
+    payload: error,
+    error: true,
+  };
+}
 
 /**
  *
@@ -38,6 +62,20 @@ export function loginFailure(error) {
   };
 }
 
+export const loadUser = () => async (dispatch) => {
+  dispatch(loadUserRequest());
+
+  try {
+    const response = await fakeApi('/user', {
+      method: 'GET',
+      credentials: true,
+    });
+    dispatch(loadUserSuccess(response.data));
+  } catch (error) {
+    dispatch(loadUserFailure(error));
+  }
+};
+
 /**
  * @param {number} id
  * @param {string} password
@@ -67,6 +105,22 @@ export const login = (id, password) => async (dispatch, getState) => {
 
 export function reducer(state = {}, action) {
   switch (action.type) {
+    case USER_DATA_REQUEST:
+      return {
+        ...state,
+        isUserDataLoading: true,
+      };
+    case USER_DATA_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+        isUserDataLoading: false,
+      };
+    case USER_DATA_FAILURE:
+      return {
+        ...state,
+        isUserDataLoading: false,
+      };
     case USER_LOGIN_REQUEST:
       return {
         ...state,
@@ -89,4 +143,6 @@ export function reducer(state = {}, action) {
 }
 
 export const isInLogin = state => state.user.isInLogin;
-export const getToken = state => state.user.jwtToken;
+export const getSendbirdAccessToken = state => state.user.sendbirdAccessToken;
+export const getUserToken = state => state.user.jwtToken;
+export const getUserId = state => state.user.id;

@@ -8,10 +8,12 @@ import { getCourses, loadCourse } from '../state/course';
 
 const propTypes = {
   courses: PropTypes.array,
+  onCoursePress: PropTypes.func,
 };
 
 const defaultProps = {
   courses: [],
+  onCoursePress() {},
 };
 
 class CourseListContainer extends React.Component {
@@ -28,8 +30,8 @@ class CourseListContainer extends React.Component {
   }
 
   render() {
-    const { courses, ...rest } = this.props;
-    return <CourseList {...rest} courses={courses} />;
+    const { courses, onCoursePress } = this.props;
+    return <CourseList courses={courses} onCoursePress={onCoursePress} />;
   }
 }
 

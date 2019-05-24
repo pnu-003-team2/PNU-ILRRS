@@ -8,14 +8,14 @@ class HomeScreen extends React.Component {
     title: 'Home',
   };
 
-  navigateToChat = () => {
-    this.props.navigation.navigate('Chat');
+  navigateToChat = (courseId) => {
+    this.props.navigation.navigate('Chat', { courseId });
   }
 
   render() {
     return (
       <ScrollView style={styles.container}>
-        <CourseListContainer onPress={this.navigateToChat} />
+        <CourseListContainer onCoursePress={this.navigateToChat} />
       </ScrollView>
     );
   }
