@@ -1,43 +1,34 @@
-import React from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { connectSendbird, isSendbirdConnected } from '../state/sendbird';
-import { getUserId } from '../state/user';
+import { connectSendbird } from '../state/sendbird/actions';
+import { isSendbirdConnected } from '../state/sendbird/selectors';
+import { getUserId } from '../state/user/selectors';
 
-class FetchSendbirdConnection extends React.Component {
-  static propTypes = {
-    connected: PropTypes.bool,
-    studentId: PropTypes.string,
-    onConnect: PropTypes.func,
-  };
-  static defaultProps = {
-    connected: false,
-    studentId: '',
-    onConnect() {},
-  };
+const propTypes = {
+  connected: PropTypes.bool,
+  studentId: PropTypes.string,
+  onConnect: PropTypes.func,
+};
 
-  componentDidMount() {
-    const { connected, studentId } = this.props;
-    if (!connected && this.props.studentId) {
-      this.props.onConnect(studentId);
+const defaultProps = {
+  connected: false,
+  studentId: '',
+  onConnect() {},
+};
+
+function FetchSendbirdConnection({ connected, studentId, onConnect }) {
+  useEffect(() => {
+    if (!connected && studentId) {
+      onConnect(studentId);
     }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { connected, studentId, onConnect } = this.props;
-    if (!connected) {
-      if (studentId &&
-          studentId !== prevProps.studentId) {
-        onConnect(studentId);
-      }
-    }
-  }
-
-  render() {
-    return null;
-  }
+  }, [connected, studentId]);
+  return null;
 }
+
+FetchSendbirdConnection.propTypes = propTypes;
+FetchSendbirdConnection.defaultProps = defaultProps;
 
 const mapStateToProps = state => ({
   connected: isSendbirdConnected(state),

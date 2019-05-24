@@ -1,38 +1,31 @@
-import React from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { getCourseSendbirdChannelUrl } from '../state/course';
-import { fetchChannelRequest } from '../state/sendbird';
+import { fetchChannelRequest } from '../state/sendbird/actions';
+import { getCourseSendbirdChannelUrl } from '../state/course/selectors';
 
-class FetchSendbirdChannel extends React.Component {
-  static propTypes = {
-    channelUrl: PropTypes.string,
-    onLoad: PropTypes.func,
-  };
-  static defaultProps = {
-    channelUrl: '',
-    onLoad() {},
-  };
+const propTypes = {
+  channelUrl: PropTypes.string,
+  onLoad: PropTypes.func,
+};
 
-  componentDidMount() {
-    const { channelUrl, onLoad } = this.props;
+const defaultProps = {
+  channelUrl: '',
+  onLoad() {},
+};
+
+function FetchSendbirdChannel({ channelUrl, onLoad }) {
+  useEffect(() => {
     if (channelUrl) {
       onLoad(channelUrl);
     }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { channelUrl, onLoad } = this.props;
-    if (channelUrl && channelUrl !== prevProps.channelUrl) {
-      onLoad(channelUrl);
-    }
-  }
-
-  render() {
-    return null;
-  }
+  }, [channelUrl]);
+  return null;
 }
+
+FetchSendbirdChannel.propTypes = propTypes;
+FetchSendbirdChannel.defaultProps = defaultProps;
 
 const mapStateToProps = (state, props) => ({
   channelUrl: getCourseSendbirdChannelUrl(state, props),

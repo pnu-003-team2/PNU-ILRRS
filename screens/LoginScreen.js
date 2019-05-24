@@ -12,7 +12,8 @@ import { connect } from 'react-redux';
 
 import RelativeText from '../components/RelativeText';
 import RelativeTextInput from '../components/RelativeTextInput';
-import { isInLogin, login } from '../state/user';
+import { login } from '../state/user/actions';
+import { isInLogin } from '../state/user/selectors';
 
 class LoginScreen extends React.Component {
   static navigationOptions = {

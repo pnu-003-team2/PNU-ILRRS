@@ -5,13 +5,13 @@ import rootReducer from './root-reducer';
 import {
   sendbirdChannelMiddleware,
   sendbirdConnectionMiddleware,
-} from './sendbird';
+} from './sendbird/middlewares';
 
 function configureStore() {
   const middlewares = [
-    thunk,
     sendbirdChannelMiddleware,
     sendbirdConnectionMiddleware,
+    thunk,
   ];
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

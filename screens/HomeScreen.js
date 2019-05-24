@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 
 import CourseListContainer from '../containers/CourseListContainer';
+import FetchCourses from '../containers/FetchCourses';
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -15,6 +16,7 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
+        <FetchCourses />
         <CourseListContainer onCoursePress={this.navigateToChat} />
       </ScrollView>
     );
