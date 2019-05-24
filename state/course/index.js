@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
 
+import {
+  COURSE_LOAD_REQUEST,
+  COURSE_LOAD_SUCCESS,
+  COURSE_LOAD_FAILURE,
+} from '../action-types';
 import { fakeApi } from '../api';
-
-export const COURSE_LOAD_REQUEST = 'COURSE_LOAD_REQUEST';
-export const COURSE_LOAD_SUCCESS = 'COURSE_LOAD_SUCCESS';
-export const COURSE_LOAD_FAILURE = 'COURSE_LOAD_FAILURE';
 
 export function loadCourseRequest() {
   return {

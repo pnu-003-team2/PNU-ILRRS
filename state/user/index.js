@@ -1,11 +1,12 @@
+import {
+  USER_DATA_REQUEST,
+  USER_DATA_SUCCESS,
+  USER_DATA_FAILURE,
+  USER_LOGIN_REQUEST,
+  USER_LOGIN_SUCCESS,
+  USER_LOGIN_FAILURE,
+} from '../action-types';
 import { fakeApi } from '../api';
-
-export const USER_DATA_REQUEST = 'USER_DATA_REQUEST';
-export const USER_DATA_SUCCESS = 'USER_DATA_SUCCESS';
-export const USER_DATA_FAILURE = 'USER_DATA_FAILURE';
-export const USER_LOGIN_REQUEST = 'USER_LOGIN_REQUEST';
-export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
-export const USER_LOGIN_FAILURE = 'USER_LOGIN_FAILURE';
 
 export function loadUserRequest() {
   return {
