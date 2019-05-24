@@ -7,7 +7,7 @@ import {
   USER_LOGIN_FAILURE,
 } from '../action-types';
 import { fakeApi } from '../api';
-import { isInLogin } from '.';
+import { isInLogin } from './selectors';
 
 export function loadUserRequest() {
   return {

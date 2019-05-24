@@ -9,7 +9,7 @@ import {
 import {
   getSendbirdAccessToken,
   getUserId,
-} from '../user';
+} from '../user/selectors';
 
 export function connectSendbirdRequest(userId, sendbirdAccessToken) {
   return {

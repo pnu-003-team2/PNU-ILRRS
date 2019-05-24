@@ -40,11 +40,7 @@ export const sendbirdChannelMiddleware = () => next => (action) => {
     if (error) {
       next(fetchChannelFailure(error));
     } else {
-      console.log(groupChannel);
       next(fetchChannelSuccess(groupChannel));
     }
   });
 };
-
-export const isConnecting = state => state.sendbird.isConnecting;
-export const isSendbirdConnected = state => state.sendbird.connected;

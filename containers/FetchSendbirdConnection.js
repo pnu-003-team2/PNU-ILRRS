@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { isSendbirdConnected } from '../state/sendbird';
 import { connectSendbird } from '../state/sendbird/actions';
-import { getUserId } from '../state/user';
+import { isSendbirdConnected } from '../state/sendbird/selectors';
+import { getUserId } from '../state/user/selectors';
 
 class FetchSendbirdConnection extends React.Component {
   static propTypes = {

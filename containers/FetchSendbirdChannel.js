@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { getCourseSendbirdChannelUrl } from '../state/course';
 import { fetchChannelRequest } from '../state/sendbird/actions';
+import { getCourseSendbirdChannelUrl } from '../state/course/selectors';
 
 class FetchSendbirdChannel extends React.Component {
   static propTypes = {

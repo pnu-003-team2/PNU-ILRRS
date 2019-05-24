@@ -4,7 +4,7 @@ import {
   COURSE_LOAD_FAILURE,
 } from '../action-types';
 import { fakeApi } from '../api';
-import { isCourseLoading } from '.';
+import { isCourseLoading } from './selectors';
 
 export function loadCourseRequest() {
   return {
