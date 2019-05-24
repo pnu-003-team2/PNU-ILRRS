@@ -41,7 +41,7 @@ export const loadCourse = () => async (dispatch, getState) => {
     dispatch(loadCourseFailure(error));
     return Promise.reject(error);
   }
-}
+};
 
 function byId(state = {}, action) {
   switch (action.type) {

@@ -67,7 +67,7 @@ class LoginScreen extends React.Component {
 
   render() {
     const { studentIdError, passwordError } = this.state;
-    const { isInLogin } = this.props;
+    const { isLoggedIn } = this.props;
     return (
       <View style={styles.container}>
         <Text style={styles.title}>강의톡</Text>
@@ -84,8 +84,8 @@ class LoginScreen extends React.Component {
           onChangeText={this.handlePasswordChange}
         />
         <RelativeText>{passwordError}</RelativeText>
-        {isInLogin && <ActivityIndicator size="large" color="#0000ff" />}
-        {!isInLogin && (
+        {isLoggedIn && <ActivityIndicator size="large" color="#0000ff" />}
+        {!isLoggedIn && (
           <Button
             disabled={this.shouldDisabled()}
             title="로그인"
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  isInLogin: isInLogin(state),
+  isLoggedIn: isInLogin(state),
 });
 
 const mapDispatchToProps = {
