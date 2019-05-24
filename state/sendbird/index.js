@@ -86,12 +86,12 @@ export const sendbirdChannelMiddleware = () => next => (action) => {
       next(fetchChannelSuccess(groupChannel));
     }
   });
-}
+};
 
 const initialState = {
   connected: false,
   isConnecting: false,
-}
+};
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
