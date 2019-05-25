@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import CourseListContainer from '../containers/CourseListContainer';
 import FetchCourses from '../containers/FetchCourses';
+import FetchUserData from '../containers/FetchUserData';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 class HomeScreen extends React.Component {
@@ -24,22 +25,24 @@ class HomeScreen extends React.Component {
 
   render() {
     return (
-        <SafeAreaView style={styles.container} forceInset={{ bottom: 'never' }}>
-          <ScrollView style={styles.courseContainer}>
-            <View style={styles.settingIconConatiner}>
-              <TouchableWithoutFeedback onPress={this.navigateToSetting}>
-                <Icon
-                  name="settings"
-                  size={32}
-                  color="#333333"
-                />
-              </TouchableWithoutFeedback>
-            </View>
-            <Text style={styles.TitleText}>강의목록</Text>
-            <FetchCourses />
-            <CourseListContainer onCoursePress={this.navigateToChat} />
-          </ScrollView>
-        </SafeAreaView>
+      <SafeAreaView style={styles.container} forceInset={{ bottom: 'never' }}>
+        <FetchCourses />
+        <FetchUserData />
+        <ScrollView style={styles.courseContainer}>
+          <View style={styles.settingIconConatiner}>
+            <TouchableWithoutFeedback onPress={this.navigateToSetting}>
+              <Icon
+                name="settings"
+                size={32}
+                color="#333333"
+              />
+            </TouchableWithoutFeedback>
+          </View>
+          <Text style={styles.TitleText}>강의목록</Text>
+          <FetchCourses />
+          <CourseListContainer onCoursePress={this.navigateToChat} />
+        </ScrollView>
+      </SafeAreaView>
     );
   }
 }
