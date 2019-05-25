@@ -81,6 +81,7 @@ class LoginScreen extends React.Component {
           <AirbnbTextInput
             style={styles.studentNoInput}
             placeholder="학번"
+            isSecured={false}
             value={this.state.studentId}
             onChangeText={this.handleStudentIdChange}
           />
@@ -88,6 +89,7 @@ class LoginScreen extends React.Component {
           <AirbnbTextInput
             style={styles.passwordInput}
             placeholder="비밀번호"
+            isSecured={true}
             value={this.state.password}
             onChangeText={this.handlePasswordChange}
           />

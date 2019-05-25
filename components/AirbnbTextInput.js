@@ -13,8 +13,9 @@ export default class AirbnbTextInput extends Component {
     placeholder: PropTypes.string.isRequired,
     onChangeText: PropTypes.func.isRequired,
     value: PropTypes.string.isRequired,
+    isSecured: PropTypes.bool.isRequired,
   };
-  
+
   static defaultProps = {
     style: null,
   };
@@ -32,12 +33,13 @@ export default class AirbnbTextInput extends Component {
   }
 
   render() {
-    const { value } = this.props;
+    const { value, isSecured } = this.props;
     const { isFocus } = this.state;
     return (
       <View style={styles.container}>
         { (!isFocus && value.length === 0) ? <Text style={styles.placeholder}>{this.props.placeholder}</Text> : null}
         <TextInput
+          secureTextEntry={isSecured}
           style={styles.textInput}
           value={value}
           onChangeText={this.onTextChange}
