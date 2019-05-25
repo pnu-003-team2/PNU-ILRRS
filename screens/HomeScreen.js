@@ -2,22 +2,20 @@ import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 
 import CourseListContainer from '../containers/CourseListContainer';
-import FetchCourses from '../containers/FetchCourses';
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
     title: 'Home',
   };
 
-  navigateToChat = (courseId) => {
-    this.props.navigation.navigate('Chat', { courseId });
+  navigateToChat = () => {
+    this.props.navigation.navigate('Chat');
   }
 
   render() {
     return (
       <ScrollView style={styles.container}>
-        <FetchCourses />
-        <CourseListContainer onCoursePress={this.navigateToChat} />
+        <CourseListContainer onPress={this.navigateToChat} />
       </ScrollView>
     );
   }

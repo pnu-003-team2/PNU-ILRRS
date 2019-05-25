@@ -11,10 +11,11 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
 import { SafeAreaView } from 'react-navigation';
 
-
+import RoundedButton from '../components/RoundedButton';
 import AirbnbTextInput from '../components/AirbnbTextInput';
 import { login } from '../state/user/actions';
 import { isInLogin } from '../state/user/selectors';
+
 
 class LoginScreen extends React.Component {
 
@@ -98,11 +99,14 @@ class LoginScreen extends React.Component {
 
         {isLoggedIn && <ActivityIndicator size="large" color="#0000ff" />}
         {!isLoggedIn && (
-          <Button
-            disabled={this.shouldDisabled()}
-            title="로그인"
-            onPress={this.signIn}
-          />
+          <View style={styles.loginView}>
+            <RoundedButton buttonText="시작하기" onPress={this.signIn} disabled={this.shouldDisabled()} />
+          </View>
+          // <Button style = {styles.loginbutton}
+          //   disabled={this.shouldDisabled()}
+          //   title="로그인"
+          //   onPress={this.signIn}
+          // />
         )}
       </SafeAreaView>
     );
@@ -112,6 +116,10 @@ class LoginScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  loginView: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   greetingContainer: {
     paddingVertical: 90,
@@ -133,9 +141,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     paddingLeft: 30,
     justifyContent: 'space-between',
-  },
-  Input: {
-
   },
 });
 
