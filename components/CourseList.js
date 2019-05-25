@@ -6,26 +6,22 @@ import CourseItem from './CourseItem';
 
 const propTypes = {
   courses: PropTypes.arrayOf(PropTypes.shape({
-    className: PropTypes.string,
-    classDivision: PropTypes.string,
-    code: PropTypes.number,
-    professorName: PropTypes.string,
-    timeTable: PropTypes.string,
+    id: PropTypes.number,
   })),
+  onCoursePress: PropTypes.func,
 };
 
 const defaultProps = {
   courses: [],
+  onCoursePress() {},
 };
 
-function CourseList({ courses, onPress }) {
-  return (
-    <FlatList
-      data={courses.map(course => ({ ...course, key: course.id.toString() }))}
-      renderItem={({ item }) => <CourseItem course={item} onPress={onPress} /> }
-    />
-  );
-}
+const CourseList = ({ courses, onCoursePress }) => (
+  <FlatList
+    data={courses.map(course => ({ ...course, key: course.id.toString() }))}
+    renderItem={({ item }) => <CourseItem course={item} onPress={onCoursePress} /> }
+  />
+);
 
 CourseList.propTypes = propTypes;
 CourseList.defaultProps = defaultProps;

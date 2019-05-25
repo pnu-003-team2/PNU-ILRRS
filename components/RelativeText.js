@@ -30,14 +30,14 @@ function RelativeText({
       style={[styles.text, { width: `${widthPercent}%` }, style]}
       {...rest}
     />
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   text: {
     marginBottom: 15,
   },
-})
+});
 
 RelativeText.propTypes = propTypes;
 RelativeText.defaultProps = defaultProps;

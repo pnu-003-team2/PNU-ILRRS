@@ -3,7 +3,7 @@ import { GiftedChat } from 'react-native-gifted-chat';
 
 export default class Chat extends React.Component {
   state = {
-    messages: []
+    messages: [],
   };
 
   componentWillMount() {
@@ -16,7 +16,7 @@ export default class Chat extends React.Component {
           user: {
             _id: 2,
             name: 'React Native',
-            avatar: "https://placeimg.com/140/140/any"
+            avatar: 'https://placeimg.com/140/140/any',
           },
         },
       ],
@@ -25,7 +25,7 @@ export default class Chat extends React.Component {
 
   handleSend = (messages = []) => {
     this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, messages)
+      messages: GiftedChat.append(previousState.messages, messages),
     }));
   }
 
@@ -36,7 +36,7 @@ export default class Chat extends React.Component {
         messages={this.state.messages}
         onSend={this.handleSend}
         user={{
-          _id: 1
+          _id: 1,
         }}
       />
     );
