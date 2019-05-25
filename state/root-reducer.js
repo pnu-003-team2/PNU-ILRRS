@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 
-import { reducer as course } from './course';
-import { reducer as user } from './user';
+import course from './course/reducers';
+import sendbird from './sendbird/reducers';
+import user from './user/reducers';
 
 export default combineReducers({
   course,
+  sendbird,
   user,
 });

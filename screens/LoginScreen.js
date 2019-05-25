@@ -11,8 +11,10 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
 import { SafeAreaView } from 'react-navigation';
 
-import { isInLogin, login } from '../state/user';
+
 import AirbnbTextInput from '../components/AirbnbTextInput';
+import { login } from '../state/user/actions';
+import { isInLogin } from '../state/user/selectors';
 
 class LoginScreen extends React.Component {
 
@@ -68,7 +70,7 @@ class LoginScreen extends React.Component {
 
   render() {
     const { studentIdError, passwordError } = this.state;
-    const { isInLogin } = this.props;
+    const { isLoggedIn } = this.props;
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.greetingContainer}>
@@ -91,9 +93,9 @@ class LoginScreen extends React.Component {
           />
           <Text>{passwordError}</Text>
         </View>
-        
-        {isInLogin && <ActivityIndicator size="large" color="#0000ff" />}
-        {!isInLogin && (
+
+        {isLoggedIn && <ActivityIndicator size="large" color="#0000ff" />}
+        {!isLoggedIn && (
           <Button
             disabled={this.shouldDisabled()}
             title="로그인"
@@ -131,12 +133,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   Input: {
-    
+
   },
 });
 
 const mapStateToProps = state => ({
-  isInLogin: isInLogin(state),
+  isLoggedIn: isInLogin(state),
 });
 
 const mapDispatchToProps = {

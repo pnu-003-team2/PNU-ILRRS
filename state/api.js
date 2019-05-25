@@ -35,7 +35,7 @@ export default async function api(path, options) {
     method,
     headers,
     url: ROOT + path,
-    ...restOptions
+    ...restOptions,
   }).then((response) => ({
     ...response,
     data: camelcaseKeys(response.data, { deep: true }),
@@ -88,7 +88,7 @@ export function fakeApi(path, options) {
             'is_remote': false,
             'updated_at': '2019-04-02T20:35:58.746Z',
             'created_at': '2019-04-02T20:35:58.746Z',
-            'version': 1
+            'version': 1,
           },
           {
             'id': 1436,
@@ -113,7 +113,7 @@ export function fakeApi(path, options) {
             'is_remote': false,
             'updated_at': '2019-04-02T20:35:58.754Z',
             'created_at': '2019-04-02T20:35:58.754Z',
-            'version': 1
+            'version': 1,
           },
           {
             'id': 1438,
@@ -138,7 +138,7 @@ export function fakeApi(path, options) {
             'is_remote': false,
             'updated_at': '2019-04-02T20:35:58.759Z',
             'created_at': '2019-04-02T20:35:58.759Z',
-            'version': 1
+            'version': 1,
           },
           {
             'id': 1440,
@@ -163,7 +163,7 @@ export function fakeApi(path, options) {
             'is_remote': false,
             'updated_at': '2019-04-02T20:35:58.760Z',
             'created_at': '2019-04-02T20:35:58.760Z',
-            'version': 1
+            'version': 1,
           },
           {
             'id': 1449,
@@ -188,7 +188,7 @@ export function fakeApi(path, options) {
             'is_remote': false,
             'updated_at': '2019-04-02T20:35:58.774Z',
             'created_at': '2019-04-02T20:35:58.774Z',
-            'version': 1
+            'version': 1,
           },
           {
             'id': 1453,
@@ -213,7 +213,7 @@ export function fakeApi(path, options) {
             'is_remote': false,
             'updated_at': '2019-04-02T20:35:58.782Z',
             'created_at': '2019-04-02T20:35:58.782Z',
-            'version': 1
+            'version': 1,
           },
           {
             'id': 1462,
@@ -238,7 +238,7 @@ export function fakeApi(path, options) {
             'is_remote': false,
             'updated_at': '2019-04-02T20:35:58.793Z',
             'created_at': '2019-04-02T20:35:58.793Z',
-            'version': 1
+            'version': 1,
           },
         ], { deep: true }),
       });

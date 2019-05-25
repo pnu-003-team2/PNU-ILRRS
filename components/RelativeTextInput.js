@@ -23,7 +23,7 @@ function RelativeTextInput({
       style={[styles.textInput, { width: `${widthPercent}%` }, style]}
       {...rest}
     />
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     padding: 10,
     height: 40,
   },
-})
+});
 
 RelativeTextInput.propTypes = propTypes;
 RelativeTextInput.defaultProps = defaultProps;

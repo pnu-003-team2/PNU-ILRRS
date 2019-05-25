@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  StyleSheet
+  StyleSheet,
 } from 'react-native';
 import { Agenda } from 'react-native-calendars';
 
@@ -31,7 +31,6 @@ export default class CalendarScreen extends Component {
   loadItems = (day) => {
     setTimeout(() => {
       for (let i = -15; i < 85; i++) {
-        this
         const time = day.timestamp + i * 24 * 60 * 60 * 1000;
         const strTime = this.timeToString(time);
         if (!this.state.items[strTime]) {
@@ -50,14 +49,14 @@ export default class CalendarScreen extends Component {
       const newItems = {};
       Object.keys(this.state.items).forEach(key => {newItems[key] = this.state.items[key];});
       this.setState({
-        items: newItems
+        items: newItems,
       });
     }, 1000);
   }
 
   renderItem(item) {
     return (
-      <View style={[styles.item, { height: 150 }]}>
+      <View style={[styles.item]}>
         <Text>{item.timeTable}</Text>
         <Text style={styles.className}>{item.className} ({item.classDivision})</Text>
         <Text style={styles.roomNumber}>{item.roomNumber}</Text>
@@ -88,6 +87,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginTop: 17,
     justifyContent: 'space-evenly',
+    height: 150,
   },
   className: {
     fontSize: 25,
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   },
   emptyDate: {
     height: 15,
-    flex:1,
-    paddingTop: 30
-  }
+    flex: 1,
+    paddingTop: 30,
+  },
 });

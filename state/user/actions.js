@@ -1,8 +1,34 @@
+import {
+  USER_DATA_REQUEST,
+  USER_DATA_SUCCESS,
+  USER_DATA_FAILURE,
+  USER_LOGIN_REQUEST,
+  USER_LOGIN_SUCCESS,
+  USER_LOGIN_FAILURE,
+} from '../action-types';
 import { fakeApi } from '../api';
+import { isInLogin } from './selectors';
 
-export const USER_LOGIN_REQUEST = 'USER_LOGIN_REQUEST';
-export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
-export const USER_LOGIN_FAILURE = 'USER_LOGIN_FAILURE';
+export function loadUserRequest() {
+  return {
+    type: USER_DATA_REQUEST,
+  };
+}
+
+export function loadUserSuccess(payload) {
+  return {
+    type: USER_DATA_SUCCESS,
+    payload,
+  };
+}
+
+export function loadUserFailure(error) {
+  return {
+    type: USER_DATA_FAILURE,
+    payload: error,
+    error: true,
+  };
+}
 
 /**
  *
@@ -38,6 +64,20 @@ export function loginFailure(error) {
   };
 }
 
+export const loadUser = () => async (dispatch) => {
+  dispatch(loadUserRequest());
+
+  try {
+    const response = await fakeApi('/user', {
+      method: 'GET',
+      credentials: true,
+    });
+    dispatch(loadUserSuccess(response.data));
+  } catch (error) {
+    dispatch(loadUserFailure(error));
+  }
+};
+
 /**
  * @param {number} id
  * @param {string} password
@@ -64,29 +104,3 @@ export const login = (id, password) => async (dispatch, getState) => {
     return Promise.reject(error);
   }
 };
-
-export function reducer(state = {}, action) {
-  switch (action.type) {
-    case USER_LOGIN_REQUEST:
-      return {
-        ...state,
-        isInLogin: true,
-      };
-    case USER_LOGIN_SUCCESS:
-      return {
-        ...state,
-        isInLogin: false,
-        jwtToken: action.payload.jwtToken,
-      };
-    case USER_LOGIN_FAILURE:
-      return {
-        ...state,
-        isInLogin: false,
-      };
-    default:
-      return state;
-  }
-}
-
-export const isInLogin = state => state.user.isInLogin;
-export const getToken = state => state.user.jwtToken;
