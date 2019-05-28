@@ -3,7 +3,7 @@ import {
   COURSE_LOAD_SUCCESS,
   COURSE_LOAD_FAILURE,
 } from '../action-types';
-import { fakeApi } from '../api';
+import api from '../api';
 import { isCourseLoading } from './selectors';
 
 export function loadCourseRequest() {
@@ -35,7 +35,7 @@ export const loadCourse = () => async (dispatch, getState) => {
   dispatch(loadCourseRequest());
 
   try {
-    const { data } = await fakeApi('/course', { credentials: true });
+    const { data } = await api('/course', { credentials: true });
     dispatch(loadCourseSuccess(data));
   } catch (error) {
     dispatch(loadCourseFailure(error));

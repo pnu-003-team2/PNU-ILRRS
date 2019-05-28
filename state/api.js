@@ -3,6 +3,7 @@ import camelcaseKeys from 'camelcase-keys';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const ROOT = 'http://cbbeb9c0.ap.ngrok.io';
+const faked = true;
 
 /**
  *
@@ -12,6 +13,10 @@ const ROOT = 'http://cbbeb9c0.ap.ngrok.io';
 export default async function api(path, options) {
   if (!path.startsWith('/')) {
     throw new Error('API path must start with "/"');
+  }
+
+  if (faked) {
+    return fakeApi(path, options);
   }
 
   let {

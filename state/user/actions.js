@@ -6,7 +6,7 @@ import {
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAILURE,
 } from '../action-types';
-import { fakeApi } from '../api';
+import api from '../api';
 import { isInLogin } from './selectors';
 
 export function loadUserRequest() {
@@ -68,7 +68,7 @@ export const loadUser = () => async (dispatch) => {
   dispatch(loadUserRequest());
 
   try {
-    const response = await fakeApi('/user', {
+    const response = await api('/user', {
       method: 'GET',
       credentials: true,
     });
@@ -90,7 +90,7 @@ export const login = (id, password) => async (dispatch, getState) => {
   dispatch(loginRequest(id, password));
 
   try {
-    const response = await fakeApi('/user/login', {
+    const response = await api('/user/login', {
       method: 'POST',
       data: {
         id,
