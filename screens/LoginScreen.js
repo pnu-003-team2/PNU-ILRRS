@@ -2,10 +2,10 @@ import React from 'react';
 import {
   ActivityIndicator,
   Alert,
-  Button,
   StyleSheet,
   Text,
   View,
+  ScrollView,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
@@ -74,40 +74,37 @@ class LoginScreen extends React.Component {
     const { isLoggedIn } = this.props;
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.greetingContainer}>
-          <Text style={styles.upperGreeting}>환영합니다.</Text>
-          <Text style={styles.underGreeting}>아래에 정보를 입력하세요!</Text>
-        </View>
-        <View style={styles.inputContainer}>
-          <AirbnbTextInput
-            style={styles.studentNoInput}
-            placeholder="학번"
-            isSecured={false}
-            value={this.state.studentId}
-            onChangeText={this.handleStudentIdChange}
-          />
-          <Text>{studentIdError}</Text>
-          <AirbnbTextInput
-            style={styles.passwordInput}
-            placeholder="비밀번호"
-            isSecured={true}
-            value={this.state.password}
-            onChangeText={this.handlePasswordChange}
-          />
-          <Text>{passwordError}</Text>
-        </View>
-
-        {isLoggedIn && <ActivityIndicator size="large" color="#0000ff" />}
-        {!isLoggedIn && (
-          <View style={styles.loginView}>
-            <RoundedButton buttonText="시작하기" onPress={this.signIn} disabled={this.shouldDisabled()} />
+        <ScrollView>
+          <View style={styles.greetingContainer}>
+            <Text style={styles.upperGreeting}>환영합니다.</Text>
+            <Text style={styles.underGreeting}>아래에 정보를 입력하세요!</Text>
           </View>
-          // <Button style = {styles.loginbutton}
-          //   disabled={this.shouldDisabled()}
-          //   title="로그인"
-          //   onPress={this.signIn}
-          // />
-        )}
+          <View style={styles.inputContainer}>
+            <AirbnbTextInput
+              style={styles.studentNoInput}
+              placeholder="학번"
+              isSecured={false}
+              value={this.state.studentId}
+              onChangeText={this.handleStudentIdChange}
+            />
+            <Text>{studentIdError}</Text>
+            <AirbnbTextInput
+              style={styles.passwordInput}
+              placeholder="비밀번호"
+              isSecured={true}
+              value={this.state.password}
+              onChangeText={this.handlePasswordChange}
+            />
+            <Text>{passwordError}</Text>
+          </View>
+
+          {isLoggedIn && <ActivityIndicator size="large" color="#0000ff" />}
+          {!isLoggedIn && (
+            <View style={styles.loginView}>
+              <RoundedButton buttonText="시작하기" onPress={this.signIn} disabled={this.shouldDisabled()} buttonColor= "#4f54fb"/>
+            </View>
+          )}
+        </ScrollView>
       </SafeAreaView>
     );
   }

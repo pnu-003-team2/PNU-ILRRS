@@ -1,8 +1,9 @@
 import React from 'react';
-import { View,Text, ScrollView, StyleSheet } from 'react-native';
+import { Text, ScrollView, StyleSheet } from 'react-native';
 
 import CourseListContainer from '../containers/CourseListContainer';
 import FetchCourses from '../containers/FetchCourses';
+import { SafeAreaView } from 'react-navigation';
 
 class HomeScreen extends React.Component {
 
@@ -17,11 +18,13 @@ class HomeScreen extends React.Component {
 
   render() {
     return (
-        <ScrollView style={styles.container}>
-          <Text style={styles.TitleText}>강의목록</Text>
-          <FetchCourses />
-          <CourseListContainer onCoursePress={this.navigateToChat} />
-        </ScrollView>
+        <SafeAreaView style={styles.container}>
+          <ScrollView style={styles.courseContainer}>
+            <Text style={styles.TitleText}>강의목록</Text>
+            <FetchCourses />
+            <CourseListContainer onCoursePress={this.navigateToChat} />
+          </ScrollView>
+        </SafeAreaView>
     );
   }
 }
@@ -36,8 +39,10 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingTop: 15,
     backgroundColor: '#f4f4f4',
+  },
+  courseContainer: {
+    paddingTop: 15,
   },
 });
 
