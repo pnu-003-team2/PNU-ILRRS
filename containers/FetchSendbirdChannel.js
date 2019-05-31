@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { fetchChannelRequest } from '../state/sendbird/actions';
+import { isSendbirdConnected } from '../state/sendbird/selectors';
 import { getCourseSendbirdChannelUrl } from '../state/course/selectors';
 
 const propTypes = {
+  courseId: PropTypes.number,
   channelUrl: PropTypes.string,
   onLoad: PropTypes.func,
 };
@@ -15,12 +17,17 @@ const defaultProps = {
   onLoad() {},
 };
 
-function FetchSendbirdChannel({ channelUrl, onLoad }) {
+function FetchSendbirdChannel({
+  courseId,
+  channelUrl,
+  connected,
+  onLoad,
+}) {
   useEffect(() => {
-    if (channelUrl) {
-      onLoad(channelUrl);
+    if (connected && channelUrl) {
+      onLoad(channelUrl, courseId);
     }
-  }, [channelUrl]);
+  }, [connected, channelUrl]);
   return null;
 }
 
@@ -29,6 +36,7 @@ FetchSendbirdChannel.defaultProps = defaultProps;
 
 const mapStateToProps = (state, props) => ({
   channelUrl: getCourseSendbirdChannelUrl(state, props),
+  connected: isSendbirdConnected(state),
 });
 
 const mapDispatchToProps = {

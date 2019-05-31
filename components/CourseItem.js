@@ -27,7 +27,7 @@ const defaultProps = {
 };
 
 const CourseItem = ({ course, onPress }) => (
-  <TouchableWithoutFeedback onPress={onPress}>
+  <TouchableWithoutFeedback onPress={() => onPress(course.id)}>
     <View style={styles.course}>
       <View style={styles.courseTopView}>
         <View style={styles.professorBox}>

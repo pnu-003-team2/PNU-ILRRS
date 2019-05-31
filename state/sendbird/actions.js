@@ -42,17 +42,19 @@ export const connectSendbird = () => (dispatch, getState) => {
   dispatch(connectSendbirdRequest(userId, sendbirdAccessToken));
 };
 
-export function fetchChannelRequest(channelUrl) {
+export function fetchChannelRequest(channelUrl, courseId) {
   return {
     type: SENDBIRD_CHANNEL_FETCH_REQUEST,
-    payload: channelUrl,
+    channelUrl,
+    courseId,
   };
 }
 
-export function fetchChannelSuccess(payload) {
+export function fetchChannelSuccess(courseId, channel) {
   return {
     type: SENDBIRD_CHANNEL_FETCH_SUCCESS,
-    payload,
+    courseId,
+    channel,
   };
 }
 
