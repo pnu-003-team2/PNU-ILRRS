@@ -1,3 +1,4 @@
+import { SENDBIRD_APP_ID } from 'react-native-dotenv';
 import SendBird from 'sendbird';
 
 import {
@@ -11,7 +12,7 @@ import {
   fetchChannelFailure,
 } from './actions';
 
-const sb = new SendBird({ appId: '' });
+const sb = new SendBird({ appId: SENDBIRD_APP_ID });
 
 export const sendbirdConnectionMiddleware = () => next => (action) => {
   if (action.type !== SENDBIRD_CONNECT_REQUEST) {
