@@ -5,6 +5,7 @@ import {
   SENDBIRD_CONNECT_REQUEST,
   SENDBIRD_CONNECT_SUCCESS,
   SENDBIRD_CONNECT_FAILURE,
+  SENDBIRD_DISCONNECT_SUCCESS,
 } from '../action-types';
 
 const initialState = {
@@ -41,6 +42,11 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         isConnecting: false,
+        connected: false,
+      };
+    case SENDBIRD_DISCONNECT_SUCCESS:
+      return {
+        ...state,
         connected: false,
       };
     default:

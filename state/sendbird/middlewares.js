@@ -4,10 +4,13 @@ import SendBird from 'sendbird';
 import {
   SENDBIRD_CHANNEL_FETCH_REQUEST,
   SENDBIRD_CONNECT_REQUEST,
+  SENDBIRD_DISCONNECT_REQUEST,
 } from '../action-types';
 import {
   connectSendbirdSuccess,
   connectSendbirdFailure,
+  disconnectSendbirdSuccess,
+  disconnectSendbirdFailure,
   fetchChannelSuccess,
   fetchChannelFailure,
 } from './actions';
@@ -42,6 +45,22 @@ export const sendbirdChannelMiddleware = () => next => (action) => {
       next(fetchChannelFailure(error));
     } else {
       next(fetchChannelSuccess(groupChannel));
+    }
+  });
+};
+
+export const sendbirdDisconnectionMiddleware = () => next => (action) => {
+  if (action.type !== SENDBIRD_DISCONNECT_REQUEST) {
+    return next(action);
+  }
+
+  next(action);
+
+  sb.disconnect((response, error) => {
+    if (error) {
+      next(disconnectSendbirdFailure(error));
+    } else {
+      next(disconnectSendbirdSuccess());
     }
   });
 };

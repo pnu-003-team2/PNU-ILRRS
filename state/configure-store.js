@@ -5,12 +5,14 @@ import rootReducer from './root-reducer';
 import {
   sendbirdChannelMiddleware,
   sendbirdConnectionMiddleware,
+  sendbirdDisconnectionMiddleware,
 } from './sendbird/middlewares';
 
 function configureStore() {
   const middlewares = [
     sendbirdChannelMiddleware,
     sendbirdConnectionMiddleware,
+    sendbirdDisconnectionMiddleware,
     thunk,
   ];
 

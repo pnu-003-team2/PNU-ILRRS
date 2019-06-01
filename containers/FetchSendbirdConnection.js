@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { connectSendbird } from '../state/sendbird/actions';
+import { connectSendbird, disconnectSendbird } from '../state/sendbird/actions';
 import { isSendbirdConnected } from '../state/sendbird/selectors';
 import { getUserId } from '../state/user/selectors';
 
@@ -10,21 +10,38 @@ const propTypes = {
   connected: PropTypes.bool,
   studentId: PropTypes.string,
   onConnect: PropTypes.func,
+  onDisconnect: PropTypes.func,
 };
 
 const defaultProps = {
   connected: false,
   studentId: '',
   onConnect() {},
+  onDisconnect() {},
 };
 
-function FetchSendbirdConnection({ connected, studentId, onConnect }) {
-  useEffect(() => {
+class FetchSendbirdConnection extends React.Component {
+  componentDidMount() {
+    const { connected, studentId, onConnect } = this.props;
     if (!connected && studentId) {
       onConnect(studentId);
     }
-  }, [connected, studentId]);
-  return null;
+  }
+
+  componentDidUpdate(prevProps) {
+    const { connected, studentId, onConnect } = this.props;
+    if (!prevProps.connected && !connected && studentId) {
+      onConnect(studentId);
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.onDisconnect();
+  }
+
+  render() {
+    return null;
+  }
 }
 
 FetchSendbirdConnection.propTypes = propTypes;
@@ -37,6 +54,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   onConnect: connectSendbird,
+  onDisconnect: disconnectSendbird,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FetchSendbirdConnection);
