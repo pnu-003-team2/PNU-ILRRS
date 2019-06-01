@@ -12,7 +12,7 @@ const propTypes = {
   connected: PropTypes.bool,
   channel: PropTypes.object,
   user: PropTypes.shape({
-    userId: PropTypes.string,
+    id: PropTypes.string,
     name: PropTypes.string,
   }).isRequired,
 };

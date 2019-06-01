@@ -40,11 +40,13 @@ export const sendbirdChannelMiddleware = () => next => (action) => {
   }
   next(action);
 
-  sb.GroupChannel.getChannel(action.payload, (groupChannel, error) => {
+  const { channelUrl, courseId } = action;
+
+  sb.GroupChannel.getChannel(channelUrl, (groupChannel, error) => {
     if (error) {
       next(fetchChannelFailure(error));
     } else {
-      next(fetchChannelSuccess(groupChannel));
+      next(fetchChannelSuccess(courseId, groupChannel));
     }
   });
 };

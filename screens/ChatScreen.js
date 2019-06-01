@@ -1,7 +1,7 @@
 import React from 'react';
 
+import Chat from '../containers/Chat';
 import FetchSendbirdChannel from '../containers/FetchSendbirdChannel';
-import Chat from '../components/Chat';
 
 export default class ChatScreen extends React.Component {
   render() {
@@ -9,7 +9,7 @@ export default class ChatScreen extends React.Component {
     return (
       <>
         <FetchSendbirdChannel courseId={courseId} />
-        <Chat />
+        <Chat courseId={courseId} />
       </>
     );
   }
