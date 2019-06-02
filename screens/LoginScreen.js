@@ -101,8 +101,13 @@ class LoginScreen extends React.Component {
           {isLoggedIn && <ActivityIndicator size="large" color="#0000ff" />}
           {!isLoggedIn && (
             <View style={styles.loginView}>
-              <RoundedButton buttonText="시작하기" onPress={this.signIn} disabled={this.shouldDisabled()} buttonColor= "#4f54fb"/>
+              <RoundedButton buttonText="시작하기" onPress={this.signIn} disabled={this.shouldDisabled()} />
             </View>
+            // <Button style = {styles.loginbutton}
+            //   disabled={this.shouldDisabled()}
+            //   title="로그인"
+            //   onPress={this.signIn}
+            // />
           )}
         </ScrollView>
       </SafeAreaView>
