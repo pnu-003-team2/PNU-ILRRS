@@ -26,16 +26,15 @@ export default class RoundLabel extends Component {
 
 const styles = StyleSheet.create({
     box: {
-        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         marginLeft: 5,
         paddingVertical: 5,
-        paddingHorizontal: 14,
+        paddingHorizontal: 12,
         borderRadius: 10,
     },
     text: {
-        fontSize: 12,
-        fontFamily: 'Roboto-Regular',
+        fontSize: 10,
+        fontFamily: 'Roboto-Bold',
     },
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FlatList } from 'react-native';
+import { StyleSheet, FlatList } from 'react-native';
 
 import CourseItem from './CourseItem';
 
@@ -18,10 +18,26 @@ const defaultProps = {
 
 const CourseList = ({ courses, onCoursePress }) => (
   <FlatList
+    style={styles.container}
     data={courses.map(course => ({ ...course, key: course.id.toString() }))}
-    renderItem={({ item }) => <CourseItem course={item} onPress={onCoursePress} /> }
+    renderItem={({ item }) =>
+      <CourseItem
+        style={styles.course}
+        course={item}
+        onPress={onCoursePress}
+      />
+    }
   />
 );
+
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 22,
+  },
+  course: {
+    marginBottom: 22,
+  },
+});
 
 CourseList.propTypes = propTypes;
 CourseList.defaultProps = defaultProps;

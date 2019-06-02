@@ -7,7 +7,7 @@ import { getCourses } from '../state/course/selectors';
 
 const propTypes = {
   courses: PropTypes.array,
-  onCoursePress: PropTypes.func,
+  onCoursePress: PropTypes.func.isRequired,
 };
 
 const defaultProps = {

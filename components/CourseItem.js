@@ -1,11 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  StyleSheet,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 
 import SeperatedText from '../components/SeperatedText';
 import RoundLabel from '../components/RoundLabel';
@@ -26,15 +21,23 @@ const defaultProps = {
   onPress() {},
 };
 
-const CourseItem = ({ course, onPress }) => (
+const CourseItem = ({ course, onPress, style }) => (
   <TouchableWithoutFeedback onPress={() => onPress(course.id)}>
-    <View style={styles.course}>
-      <View style={styles.courseTopView}>
-        <View style={styles.professorBox}>
-          <Text >{course.professorName} 교수님</Text>
+    <View style={[styles.conatiner, style]}>
+      <View style={styles.topContainer}>
+        <View style={styles.professorContainer}>
+          <Text style={styles.professor}>{course.professorName} 교수님</Text>
         </View>
-        <RoundLabel color={'#4f54fb'} text={course.classDivision} />
-        <RoundLabel color={'#de7924'} text={course.code + ' 분반'} />
+        <View style={styles.labelContainer}>
+          <RoundLabel
+            color={'#4f54fb'}
+            text={course.classDivision}
+          />
+          <RoundLabel
+            color={'#de7924'}
+            text={course.code + ' 분반'}
+          />
+        </View>
       </View>
 
       <View style = {styles.courseBottomView}>
@@ -46,51 +49,44 @@ const CourseItem = ({ course, onPress }) => (
 );
 
 const styles = StyleSheet.create({
-  course: {
+  conatiner: {
     flexDirection: 'column',
-    alignItems: 'stretch',
     borderRadius: 15,
     backgroundColor : 'white',
-    paddingLeft: 20,
-    paddingRight: 15,
-    paddingVertical: 15,
-    marginTop: 20,
-    marginHorizontal : 30,
-    //shadowOffset: '10',
-    //elevation: 50,
-
+    paddingHorizontal: 16,
+    paddingVertical: 16,
   },
-
-  courseTopView: {
-    flex: 1,
+  topContainer: {
     flexDirection: 'row',
-    marginBottom: 8,
-    //backgroundColor: 'red',
+    marginBottom: 14,
   },
-  professorBox: {
+  professorContainer: {
+    flex: 2,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-end',
+  },
+  labelContainer: {
     flex: 3,
+    flexDirection: 'row',
     justifyContent: 'flex-end',
+    alignItems: 'center',
   },
-  professorText: {
+  professor: {
     fontSize: 14,
     color: '#404040',
     fontFamily: 'Roboto-Regular',
   },
-
   courseBottomView:{
     flex:1,
-    //backgroundColor: 'blue',
   },
   courseTitleText: {
     fontFamily: 'Roboto-Bold',
     fontSize: 20,
+    paddingBottom: 12,
   },
   coureTimeText:{
     fontFamily: 'Roboto-Regular',
-    fontSize: 14,
-  },
-  bottomPadding:{
-    paddingBottom: 7,
   },
 });
 

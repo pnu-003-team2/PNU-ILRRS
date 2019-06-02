@@ -29,6 +29,7 @@ class HomeScreen extends React.Component {
           <FetchCourses />
           <FetchUserData />
           <ScrollView style={styles.courseContainer}>
+
             <View style={styles.settingIconConatiner}>
               <TouchableWithoutFeedback onPress={this.navigateToSetting}>
                 <Icon
@@ -38,9 +39,13 @@ class HomeScreen extends React.Component {
                 />
               </TouchableWithoutFeedback>
             </View>
-            <Text style={styles.TitleText}>강의목록</Text>
+
+            <Text style={styles.titleText}>강의목록</Text>
+
             <CourseListContainer onCoursePress={this.navigateToChat} />
+
             <View style={styles.paddingView} />
+
           </ScrollView>
         </SafeAreaView>
     );
@@ -48,24 +53,24 @@ class HomeScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  settingIconConatiner: {
-    paddingHorizontal: 25,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-  },
-  TitleText: {
-    fontFamily : 'Roboto-Bold',
-    fontSize: 40,
-    marginBottom: 20,
-    marginTop: 20,
-    marginHorizontal : 30,
-  },
   container: {
     flex: 1,
     backgroundColor: '#f4f4f4',
   },
   courseContainer: {
-    paddingTop: 15,
+    paddingTop: 20,
+  },
+  settingIconConatiner: {
+    paddingHorizontal: 25,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  titleText: {
+    fontFamily : 'Roboto-Bold',
+    fontSize: 40,
+    marginBottom: 30,
+    marginTop: 20,
+    marginHorizontal : 30,
   },
   paddingView: {
     height: 200,
