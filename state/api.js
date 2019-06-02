@@ -66,7 +66,20 @@ const deferred = (params) =>
 export function fakeApi(path, options) {
   switch (path) {
     case '/user/login':
-      return deferred({ data: { jwtToken: 'token' } });
+      return deferred({
+        data: camelcaseKeys({
+          'jwtToken': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTIyNDQ1MiIsImlhdCI6MTU1OTI3ODI4MSwiZXhwIjoxNTU5MzY0NjgxfQ.i4oHBMZua4cjazKYsFOimiyXltUJn1uggis9fVlq00E',
+          'expireDate': '2019-06-01T04:51:21.640Z',
+        }),
+      });
+    case '/user':
+      return deferred({
+        data: camelcaseKeys({
+          'id': '201224452',
+          'name': '노태환',
+          'sendbird_access_token': '4dc8297988e6378ee850cd4697e1dc74fc7c3e90',
+        }),
+      });
     case '/course':
       return deferred({
         data: camelcaseKeys([
@@ -91,9 +104,10 @@ export function fakeApi(path, options) {
             'liberal_name': '',
             'is_native': ' ',
             'is_remote': false,
-            'updated_at': '2019-04-02T20:35:58.746Z',
+            'channel_url': 'sendbird_group_channel_50889_fae9ed76d457a2b59da251d2348cc83536cae9d6',
+            'updated_at': '2019-04-28T00:54:01.000Z',
             'created_at': '2019-04-02T20:35:58.746Z',
-            'version': 1,
+            'version': 2,
           },
           {
             'id': 1436,
@@ -116,9 +130,10 @@ export function fakeApi(path, options) {
             'liberal_name': '',
             'is_native': ' ',
             'is_remote': false,
-            'updated_at': '2019-04-02T20:35:58.754Z',
+            'channel_url': 'sendbird_group_channel_50889_77f0db874be2589151d42a9d250442da36498e7e',
+            'updated_at': '2019-04-28T00:54:02.000Z',
             'created_at': '2019-04-02T20:35:58.754Z',
-            'version': 1,
+            'version': 2,
           },
           {
             'id': 1438,
@@ -141,9 +156,10 @@ export function fakeApi(path, options) {
             'liberal_name': '',
             'is_native': ' ',
             'is_remote': false,
-            'updated_at': '2019-04-02T20:35:58.759Z',
+            'channel_url': 'sendbird_group_channel_50889_f4ab5296bac6e0fee092653a617010638f48b94c',
+            'updated_at': '2019-04-28T00:54:03.000Z',
             'created_at': '2019-04-02T20:35:58.759Z',
-            'version': 1,
+            'version': 2,
           },
           {
             'id': 1440,
@@ -166,9 +182,10 @@ export function fakeApi(path, options) {
             'liberal_name': '',
             'is_native': ' ',
             'is_remote': false,
-            'updated_at': '2019-04-02T20:35:58.760Z',
+            'channel_url': 'sendbird_group_channel_50889_6c4c7a24ddbb96d8a72eefe08174a1ba1c42fb4e',
+            'updated_at': '2019-04-28T00:54:04.000Z',
             'created_at': '2019-04-02T20:35:58.760Z',
-            'version': 1,
+            'version': 2,
           },
           {
             'id': 1449,
@@ -191,9 +208,10 @@ export function fakeApi(path, options) {
             'liberal_name': '',
             'is_native': ' ',
             'is_remote': false,
-            'updated_at': '2019-04-02T20:35:58.774Z',
+            'channel_url': 'sendbird_group_channel_50889_4c8fa4eee56a4ef7e8b1f571ca4538211dc6ac21',
+            'updated_at': '2019-04-28T00:54:06.000Z',
             'created_at': '2019-04-02T20:35:58.774Z',
-            'version': 1,
+            'version': 2,
           },
           {
             'id': 1453,
@@ -216,9 +234,10 @@ export function fakeApi(path, options) {
             'liberal_name': '',
             'is_native': ' ',
             'is_remote': false,
-            'updated_at': '2019-04-02T20:35:58.782Z',
+            'channel_url': 'sendbird_group_channel_50889_943a44c1a54db59a86ce820ae111f69a31ad2c83',
+            'updated_at': '2019-04-28T00:54:07.000Z',
             'created_at': '2019-04-02T20:35:58.782Z',
-            'version': 1,
+            'version': 2,
           },
           {
             'id': 1462,
@@ -241,9 +260,10 @@ export function fakeApi(path, options) {
             'liberal_name': '',
             'is_native': ' ',
             'is_remote': false,
-            'updated_at': '2019-04-02T20:35:58.793Z',
+            'channel_url': 'sendbird_group_channel_50889_8c97d910375cd0accc5f3b7d24d1fdd0e7f0904e',
+            'updated_at': '2019-04-28T00:54:09.000Z',
             'created_at': '2019-04-02T20:35:58.793Z',
-            'version': 1,
+            'version': 2,
           },
         ], { deep: true }),
       });
