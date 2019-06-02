@@ -29,7 +29,7 @@ export function loadCourseFailure(error) {
 
 export const loadCourse = () => async (dispatch, getState) => {
   if (isCourseLoading(getState())) {
-    return Promise.reject(new Error('강의를 가져오고 있습니다.'));
+    return null;
   }
 
   dispatch(loadCourseRequest());
