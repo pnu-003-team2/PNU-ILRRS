@@ -3,24 +3,24 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { loadUser } from '../state/user/actions';
-import { getUserId } from '../state/user/selectors';
+import { getUserToken } from '../state/user/selectors';
 
 const propTypes = {
-  userId: PropTypes.number,
+  token: PropTypes.string,
   onLoad: PropTypes.func,
 };
 
 const defaultProps = {
-  userId: null,
+  token: null,
   onLoad() {},
 };
 
-function FetchUserData({ userId, onLoad }) {
+function FetchUserData({ token, onLoad }) {
   useEffect(() => {
-    if (userId) {
+    if (token) {
       onLoad();
     }
-  }, [userId]);
+  }, [token]);
   return null;
 }
 
@@ -28,7 +28,7 @@ FetchUserData.propTypes = propTypes;
 FetchUserData.defaultProps = defaultProps;
 
 const mapStateToProps = (state) => ({
-  userId: getUserId(state),
+  token: getUserToken(state),
 });
 
 const mapDispatchToProps = {

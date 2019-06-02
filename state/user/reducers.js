@@ -5,6 +5,7 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAILURE,
+  USER_TOKEN_CHANGE,
 } from '../action-types';
 
 export default function reducer(state = {}, action) {
@@ -40,6 +41,11 @@ export default function reducer(state = {}, action) {
       return {
         ...state,
         isInLogin: false,
+      };
+    case USER_TOKEN_CHANGE:
+      return {
+        ...state,
+        jwtToken: action.payload,
       };
     default:
       return state;

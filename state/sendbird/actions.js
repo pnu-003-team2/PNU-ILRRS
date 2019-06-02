@@ -5,6 +5,9 @@ import {
   SENDBIRD_CONNECT_REQUEST,
   SENDBIRD_CONNECT_SUCCESS,
   SENDBIRD_CONNECT_FAILURE,
+  SENDBIRD_DISCONNECT_REQUEST,
+  SENDBIRD_DISCONNECT_SUCCESS,
+  SENDBIRD_DISCONNECT_FAILURE,
 } from '../action-types';
 import {
   getSendbirdAccessToken,
@@ -42,17 +45,49 @@ export const connectSendbird = () => (dispatch, getState) => {
   dispatch(connectSendbirdRequest(userId, sendbirdAccessToken));
 };
 
-export function fetchChannelRequest(channelUrl) {
+export function disconnectSendbirdRequest(userId, sendbirdAccessToken) {
   return {
-    type: SENDBIRD_CHANNEL_FETCH_REQUEST,
-    payload: channelUrl,
+    type: SENDBIRD_DISCONNECT_REQUEST,
+    payload: {
+      userId,
+      sendbirdAccessToken,
+    },
   };
 }
 
-export function fetchChannelSuccess(payload) {
+export function disconnectSendbirdSuccess() {
+  return {
+    type: SENDBIRD_DISCONNECT_SUCCESS,
+  };
+}
+
+export function disconnectSendbirdFailure(error) {
+  return {
+    type: SENDBIRD_DISCONNECT_FAILURE,
+    payload: error,
+    error: true,
+  };
+}
+
+export const disconnectSendbird = () => (dispatch, getState) => {
+  const userId = getUserId(getState());
+  const sendbirdAccessToken = getSendbirdAccessToken(getState());
+  dispatch(disconnectSendbirdRequest(userId, sendbirdAccessToken));
+};
+
+export function fetchChannelRequest(channelUrl, courseId) {
+  return {
+    type: SENDBIRD_CHANNEL_FETCH_REQUEST,
+    channelUrl,
+    courseId,
+  };
+}
+
+export function fetchChannelSuccess(courseId, channel) {
   return {
     type: SENDBIRD_CHANNEL_FETCH_SUCCESS,
-    payload,
+    courseId,
+    channel,
   };
 }
 

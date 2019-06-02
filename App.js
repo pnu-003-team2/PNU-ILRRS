@@ -2,6 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+import FetchSendbirdConnection from './containers/FetchSendbirdConnection';
 import AppNavigator from './navigation/AppNavigator';
 import configureStore from './state/configure-store';
 
@@ -13,6 +14,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
+        <FetchSendbirdConnection />
         <AppNavigator />
       </Provider>
     );

@@ -5,6 +5,7 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAILURE,
+  USER_TOKEN_CHANGE,
 } from '../action-types';
 import api from '../api';
 import { isInLogin } from './selectors';
@@ -104,3 +105,10 @@ export const login = (id, password) => async (dispatch, getState) => {
     return Promise.reject(error);
   }
 };
+
+export function changeUserToken(token) {
+  return {
+    type: USER_TOKEN_CHANGE,
+    payload: token,
+  };
+}

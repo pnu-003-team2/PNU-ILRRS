@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import CourseListContainer from '../containers/CourseListContainer';
 import FetchCourses from '../containers/FetchCourses';
+import FetchUserData from '../containers/FetchUserData';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 class HomeScreen extends React.Component {

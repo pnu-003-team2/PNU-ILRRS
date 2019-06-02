@@ -5,12 +5,26 @@ import {
   SENDBIRD_CONNECT_REQUEST,
   SENDBIRD_CONNECT_SUCCESS,
   SENDBIRD_CONNECT_FAILURE,
+  SENDBIRD_DISCONNECT_SUCCESS,
 } from '../action-types';
+
+export function channel(state = {}, action) {
+  switch (action.type) {
+    case SENDBIRD_CHANNEL_FETCH_SUCCESS:
+      return {
+        ...state,
+        [action.courseId]: action.channel,
+      };
+    default:
+      return state;
+  }
+}
 
 const initialState = {
   connected: false,
   isConnecting: false,
   isChannelFetcting: false,
+  channel: {},
 };
 
 export default function reducer(state = initialState, action) {
@@ -21,6 +35,10 @@ export default function reducer(state = initialState, action) {
         isChannelFetcting: true,
       };
     case SENDBIRD_CHANNEL_FETCH_SUCCESS:
+      return {
+        ...state,
+        channel: channel(state.channel, action),
+      };
     case SENDBIRD_CHANNEL_FETCH_FAILURE:
       return {
         ...state,
@@ -41,6 +59,11 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         isConnecting: false,
+        connected: false,
+      };
+    case SENDBIRD_DISCONNECT_SUCCESS:
+      return {
+        ...state,
         connected: false,
       };
     default:
