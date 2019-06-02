@@ -2,22 +2,25 @@ import React from 'react';
 import {
   ActivityIndicator,
   Alert,
-  Button,
   StyleSheet,
   Text,
   View,
+  ScrollView,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
+import { SafeAreaView } from 'react-navigation';
 
-import RelativeText from '../components/RelativeText';
-import RelativeTextInput from '../components/RelativeTextInput';
+import RoundedButton from '../components/RoundedButton';
+import AirbnbTextInput from '../components/AirbnbTextInput';
 import { login } from '../state/user/actions';
 import { isInLogin } from '../state/user/selectors';
 
+
 class LoginScreen extends React.Component {
+
   static navigationOptions = {
-    title: '로그인',
+    header: null,
   };
 
   state = {
@@ -70,30 +73,49 @@ class LoginScreen extends React.Component {
     const { studentIdError, passwordError } = this.state;
     const { isLoggedIn } = this.props;
     return (
-      <View style={styles.container}>
-        <Text style={styles.title}>강의톡</Text>
-        <RelativeTextInput
-          placeholder="학번"
-          widthPercent={80}
-          onChangeText={this.handleStudentIdChange}
-        />
-        <RelativeText>{studentIdError}</RelativeText>
-        <RelativeTextInput
-          placeholder="비밀번호"
-          secureTextEntry
-          widthPercent={80}
-          onChangeText={this.handlePasswordChange}
-        />
-        <RelativeText>{passwordError}</RelativeText>
-        {isLoggedIn && <ActivityIndicator size="large" color="#0000ff" />}
-        {!isLoggedIn && (
-          <Button
-            disabled={this.shouldDisabled()}
-            title="로그인"
-            onPress={this.signIn}
-          />
-        )}
-      </View>
+      <SafeAreaView style={styles.container}>
+        <ScrollView>
+          <View style={styles.greetingContainer}>
+            <Text style={styles.upperGreeting}>환영합니다.</Text>
+            <Text style={styles.underGreeting}>아래에 정보를 입력하세요!</Text>
+          </View>
+          <View style={styles.inputContainer}>
+            <AirbnbTextInput
+              style={styles.studentNoInput}
+              placeholder="학번"
+              isSecured={false}
+              value={this.state.studentId}
+              onChangeText={this.handleStudentIdChange}
+            />
+            <Text>{studentIdError}</Text>
+            <AirbnbTextInput
+              style={styles.passwordInput}
+              placeholder="비밀번호"
+              isSecured={true}
+              value={this.state.password}
+              onChangeText={this.handlePasswordChange}
+            />
+            <Text>{passwordError}</Text>
+          </View>
+
+          {isLoggedIn && <ActivityIndicator size="large" color="#0000ff" />}
+          {!isLoggedIn && (
+            <View style={styles.loginView}>
+              <RoundedButton
+                buttonText="시작하기"
+                onPress={this.signIn}
+                disabled={this.shouldDisabled()}
+                buttonColor="#4f54fb"
+              />
+            </View>
+            // <Button style = {styles.loginbutton}
+            //   disabled={this.shouldDisabled()}
+            //   title="로그인"
+            //   onPress={this.signIn}
+            // />
+          )}
+        </ScrollView>
+      </SafeAreaView>
     );
   }
 }
@@ -101,15 +123,32 @@ class LoginScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    padding: 10,
   },
-  title: {
-    fontWeight: 'bold',
+  loginView: {
+    marginTop: 35,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  greetingContainer: {
+    paddingVertical: 90,
+    paddingHorizontal: 40,
+  },
+  upperGreeting: {
+    marginBottom: 7,
     fontSize: 40,
-    marginTop: '45%',
-    marginBottom: 50,
+    fontFamily: 'Roboto-Bold',
+    color: '#404040',
+  },
+  underGreeting: {
+    fontSize: 23,
+    fontFamily: 'Roboto-Regular',
+    color: '#4B4B4B',
+  },
+  inputContainer: {
+    height: 180,
+    flexDirection: 'column',
+    paddingLeft: 30,
+    justifyContent: 'space-between',
   },
 });
 

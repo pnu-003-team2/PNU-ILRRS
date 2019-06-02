@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 
 import SeperatedText from '../components/SeperatedText';
+import RoundLabel from '../components/RoundLabel';
 
 const propTypes = {
   course: PropTypes.shape({
@@ -28,16 +29,17 @@ const defaultProps = {
 const CourseItem = ({ course, onPress }) => (
   <TouchableWithoutFeedback onPress={onPress}>
     <View style={styles.course}>
-      <View style={styles.coureLeftView}>
-        <Text style={[styles.titleText, styles.bottomPadding]}>{course.className}</Text>
-        <Text style={course.classDivision.includes('전공') ? [styles.redText,styles.bottomPadding] : [styles.grayText,styles.bottomPadding]}>
-          {course.classDivision}
-        </Text>
-        <Text style={[styles.codeText]}>{course.code} 분반</Text>
-        <SeperatedText timeTable={course.timeTable}/>
-      </View >
-      <View style={styles.courseRightView}>
-        <Text style={styles.professorNameText}>{course.professorName} 교수님</Text>
+      <View style={styles.courseTopView}>
+        <View style={styles.professorBox}>
+          <Text >{course.professorName} 교수님</Text>
+        </View>
+        <RoundLabel color={'#4f54fb'} text={course.classDivision} />
+        <RoundLabel color={'#de7924'} text={course.code + ' 분반'} />
+      </View>
+
+      <View style = {styles.courseBottomView}>
+        <Text style={[styles.courseTitleText, styles.bottomPadding]}>{course.className}</Text>
+        <SeperatedText style={styles.coureTimeText} timeTable={course.timeTable}/>
       </View>
     </View>
   </TouchableWithoutFeedback>
@@ -45,43 +47,50 @@ const CourseItem = ({ course, onPress }) => (
 
 const styles = StyleSheet.create({
   course: {
-    flexDirection: 'row',
-    alignItems: 'stretch',
-    padding: 16,
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: 'skyblue',
-    marginLeft: 10,
-    marginRight: 10,
-    marginBottom: 10,
-  },
-  coureLeftView: {
-    flex: 3,
     flexDirection: 'column',
-  },
-  courseRightView:{
-    flex: 1,
+    alignItems: 'stretch',
+    borderRadius: 15,
+    backgroundColor : 'white',
+    paddingLeft: 20,
+    paddingRight: 15,
+    paddingVertical: 15,
+    marginTop: 20,
+    marginHorizontal : 30,
+    //shadowOffset: '10',
+    //elevation: 50,
 
   },
-  professorNameText: {
-    fontSize: 13,
+
+  courseTopView: {
+    flex: 1,
+    flexDirection: 'row',
+    marginBottom: 8,
+    //backgroundColor: 'red',
   },
-  titleText: {
-    fontWeight: '600',
-    fontSize: 19,
+  professorBox: {
+    flex: 3,
+    justifyContent: 'flex-end',
   },
-  bottomPadding: {
-    paddingBottom : 16,
+  professorText: {
+    fontSize: 14,
+    color: '#404040',
+    fontFamily: 'Roboto-Regular',
   },
-  redText: {
-    color:  'red',
+
+  courseBottomView:{
+    flex:1,
+    //backgroundColor: 'blue',
   },
-  grayText: {
-    color:  'gray',
+  courseTitleText: {
+    fontFamily: 'Roboto-Bold',
+    fontSize: 20,
   },
-  codeText: {
-    color : 'gray',
-    paddingBottom: 4,
+  coureTimeText:{
+    fontFamily: 'Roboto-Regular',
+    fontSize: 14,
+  },
+  bottomPadding:{
+    paddingBottom: 7,
   },
 });
 
