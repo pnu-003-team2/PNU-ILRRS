@@ -38,6 +38,7 @@ class HomeScreen extends React.Component {
             <Text style={styles.TitleText}>강의목록</Text>
             <FetchCourses />
             <CourseListContainer onCoursePress={this.navigateToChat} />
+            <View style={styles.paddingView} />
           </ScrollView>
         </SafeAreaView>
     );
@@ -63,6 +64,9 @@ const styles = StyleSheet.create({
   },
   courseContainer: {
     paddingTop: 15,
+  },
+  paddingView: {
+    height: 200,
   },
 });
 
