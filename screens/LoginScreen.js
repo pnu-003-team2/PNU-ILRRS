@@ -101,7 +101,12 @@ class LoginScreen extends React.Component {
           {isLoggedIn && <ActivityIndicator size="large" color="#0000ff" />}
           {!isLoggedIn && (
             <View style={styles.loginView}>
-              <RoundedButton buttonText="시작하기" onPress={this.signIn} disabled={this.shouldDisabled()} />
+              <RoundedButton
+                buttonText="시작하기"
+                onPress={this.signIn}
+                disabled={this.shouldDisabled()}
+                buttonColor="#4f54fb"
+              />
             </View>
             // <Button style = {styles.loginbutton}
             //   disabled={this.shouldDisabled()}
@@ -120,6 +125,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   loginView: {
+    marginTop: 35,
     justifyContent: 'center',
     alignItems: 'center',
   },

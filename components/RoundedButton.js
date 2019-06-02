@@ -7,7 +7,7 @@ export default class RoundedButton extends Component {
   static propTypes = {
     onPress: PropTypes.func.isRequired,
     buttonText: PropTypes.string.isRequired,
-    disabled: PropTypes.func,
+    disabled: PropTypes.bool,
     buttonColor: PropTypes.string.isRequired,
   };
 
@@ -25,7 +25,6 @@ export default class RoundedButton extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: '#4f54fb',
     height: 65,
     width: 165,
     borderRadius: 32.5,
