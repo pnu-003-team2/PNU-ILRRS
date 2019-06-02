@@ -26,6 +26,8 @@ class HomeScreen extends React.Component {
   render() {
     return (
         <SafeAreaView style={styles.container} forceInset={{ bottom: 'never' }}>
+          <FetchCourses />
+          <FetchUserData />
           <ScrollView style={styles.courseContainer}>
             <View style={styles.settingIconConatiner}>
               <TouchableWithoutFeedback onPress={this.navigateToSetting}>
@@ -37,7 +39,6 @@ class HomeScreen extends React.Component {
               </TouchableWithoutFeedback>
             </View>
             <Text style={styles.TitleText}>강의목록</Text>
-            <FetchCourses />
             <CourseListContainer onCoursePress={this.navigateToChat} />
             <View style={styles.paddingView} />
           </ScrollView>
