@@ -6,16 +6,26 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+
 import ImagePicker from 'react-native-image-picker';
-import AsyncStorage from '@react-native-community/async-storage';
+import PropTypes from 'prop-types';
+
+const propTypes = {
+  avatarSource : PropTypes.string,
+  userName : PropTypes.string,
+  userNumber : PropTypes.string,
+};
+
+const defaultProps = {
+  avatarSource : "https://bootdey.com/img/Content/avatar/avatar6.png",
+  userName : "손덕현",
+  userNumber : "201324467",
+};
 
 export default class SettingsScreen extends React.Component {
+
   static navigationOptions = {
     title: '설정',
-  };
-
-  state = {
-    avatarSource: null,
   };
 
   selectPhotoTapped = () => {
@@ -37,12 +47,12 @@ export default class SettingsScreen extends React.Component {
         console.log('ImagePicker Error: ', response.error);
       } else if (response.customButton) {
         console.log('User tapped custom button: ', response.customButton);
-      } else {
+      } else {  
         let source = { uri: response.uri };
         // You can also display the image using data:
         // let source = { uri: 'data:image/jpeg;base64,' + response.data };
         this.setState({
-          avatarSource: source,
+          avatarSource : source,
         });
       }
     });
@@ -54,40 +64,26 @@ export default class SettingsScreen extends React.Component {
   }
 
   render() {
-    const { avatarSource } = this.state;
     return (
       <View style={styles.container}>
           <View style={styles.header}>
-            <TouchableOpacity activeOpacity={0.5}>
-              {avatarSource ? (
-                <Image
+            <TouchableOpacity activeOpacity={0.5} style={styles.avatarframe} onPress={this.selectPhotoTapped} >
+              <Image
                   style={styles.avatar}
-                  source={this.state.avatarSource}
-                />
-              ) : (
-                <Image
-                  style={styles.avatar}
-                  source={{ uri: 'https://bootdey.com/img/Content/avatar/avatar6.png' }}
-                />
-              )}
+                  source={{uri: this.props.avatarSource}}
+              />
             </TouchableOpacity>
           </View>
           <View style={styles.body}>
             <View style={styles.bodyContent}>
-              <Text style={styles.name}>Deok Hyeon</Text>
-              <Text style={styles.info}>UX Designer / Mobile developer</Text>
+              <Text style={styles.name}>{this.props.userName}</Text>
+              <Text style={styles.info}>{this.props.userNumber}</Text>
               <Text style={styles.description}>Computer Engineering</Text>
               <TouchableOpacity
                 style={styles.buttonContainer}
                 onPress={this.signOut}
               >
                 <Text>Logout</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.buttonContainer}
-                onPress={this.selectPhotoTapped}
-              >
-                <Text>Image Change</Text>
               </TouchableOpacity>
             </View>
         </View>
@@ -96,21 +92,31 @@ export default class SettingsScreen extends React.Component {
   }
 }
 
+SettingsScreen.propTypes = propTypes;
+SettingsScreen.defaultProps = defaultProps;
+
 const styles = StyleSheet.create({
   header: {
     backgroundColor: '#00BFFF',
     height:200,
   },
-  avatar: {
+  avatarframe: {
     width: 130,
     height: 130,
     borderRadius: 63,
     borderWidth: 4,
     borderColor: 'white',
-    marginBottom:10,
+    marginBottom: 10,
+    alignSelf: 'center',
+    marginTop: 130,
+
+  },
+  avatar: {
+    width: 124,
+    height: 124,
+    borderRadius: 63,
+    borderWidth: 3,
     alignSelf:'center',
-    position: 'absolute',
-    marginTop:130,
   },
   body: {
     marginTop:40,
@@ -137,7 +143,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   buttonContainer: {
-    marginTop:10,
+    marginTop:100,
     height:45,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -147,3 +153,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#00BFFF',
   },
 });
+	
