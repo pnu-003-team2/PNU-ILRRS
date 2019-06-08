@@ -22,7 +22,7 @@ const defaultProps = {
 };
 
 const CourseItem = ({ course, onPress, style }) => (
-  <TouchableWithoutFeedback onPress={() => onPress(course.id)}>
+  <TouchableWithoutFeedback onPress={() => onPress(course.id, course.className)}>
     <View style={[styles.conatiner, style]}>
       <View style={styles.topContainer}>
         <View style={styles.professorContainer}>

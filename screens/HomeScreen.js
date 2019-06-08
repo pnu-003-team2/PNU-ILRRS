@@ -15,8 +15,8 @@ class HomeScreen extends React.Component {
   };
 
 
-  navigateToChat = (courseId) => {
-    this.props.navigation.navigate('Chat', { courseId });
+  navigateToChat = (courseId, className) => {
+    this.props.navigation.navigate('Chat', { courseId, className });
   }
 
   navigateToSetting = () => {
