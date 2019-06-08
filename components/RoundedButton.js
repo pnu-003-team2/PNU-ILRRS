@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   textView: {
     color: '#fafafa',
     fontSize: 25,
-    fontWeight: '700',
+    fontFamily: 'Roboto-Bold',
   },
 
 });
