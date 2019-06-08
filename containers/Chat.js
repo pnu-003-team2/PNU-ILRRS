@@ -112,6 +112,7 @@ class Chat extends React.Component {
     const { user } = this.props;
     return (
       <GiftedChat
+        textInputProps={{autoFocus: true}}
         messages={this.state.messages}
         onLoadEarlier={this.fetchPreviousMessages}
         onSend={this.handleSend}
