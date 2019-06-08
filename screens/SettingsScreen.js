@@ -12,6 +12,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
     title: '설정',
+    headerTintColor: 'black',
   };
 
   state = {

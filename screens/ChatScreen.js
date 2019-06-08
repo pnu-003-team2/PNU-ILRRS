@@ -7,6 +7,7 @@ export default class ChatScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: navigation.getParam('className', '채팅방'),
+      headerTintColor: 'black',
     };
   };
 
