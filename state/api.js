@@ -2,7 +2,7 @@ import axios from 'axios';
 import camelcaseKeys from 'camelcase-keys';
 import AsyncStorage from '@react-native-community/async-storage';
 
-const ROOT = 'http://5d7ce98b.ap.ngrok.io';
+const ROOT = 'http://lab-server-elb-1115867818.ap-northeast-2.elb.amazonaws.com';
 const faked = false;
 
 /**
