@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   titleText: {
+    color: '#000',
     fontFamily : 'Roboto-Bold',
     fontSize: 40,
     marginBottom: 30,
