@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
   placeholder: {
     position: 'absolute',
     top: 2,
+    fontFamily: 'Roboto-Regular',
   },
   textInput: {
     fontSize: 24,

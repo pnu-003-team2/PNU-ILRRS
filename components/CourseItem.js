@@ -22,7 +22,7 @@ const defaultProps = {
 };
 
 const CourseItem = ({ course, onPress, style }) => (
-  <TouchableWithoutFeedback onPress={() => onPress(course.id)}>
+  <TouchableWithoutFeedback onPress={() => onPress(course.id, course.className)}>
     <View style={[styles.conatiner, style]}>
       <View style={styles.topContainer}>
         <View style={styles.professorContainer}>
@@ -81,12 +81,15 @@ const styles = StyleSheet.create({
     flex:1,
   },
   courseTitleText: {
+    color: '#000',
     fontFamily: 'Roboto-Bold',
     fontSize: 20,
     paddingBottom: 12,
   },
   coureTimeText:{
     fontFamily: 'Roboto-Regular',
+    fontSize: 13,
+    color: '#404040',
   },
 });
 

@@ -80,7 +80,6 @@ class LoginScreen extends React.Component {
           </View>
           <View style={styles.inputContainer}>
             <AirbnbTextInput
-              style={styles.studentNoInput}
               placeholder="학번"
               isSecured={false}
               keyboardIsNumberType={true}
@@ -89,7 +88,6 @@ class LoginScreen extends React.Component {
             />
             <Text>{studentIdError}</Text>
             <AirbnbTextInput
-              style={styles.passwordInput}
               placeholder="비밀번호"
               isSecured={true}
               keyboardIsNumberType={false}

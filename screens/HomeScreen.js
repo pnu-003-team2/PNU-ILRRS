@@ -15,8 +15,8 @@ class HomeScreen extends React.Component {
   };
 
 
-  navigateToChat = (courseId) => {
-    this.props.navigation.navigate('Chat', { courseId });
+  navigateToChat = (courseId, className) => {
+    this.props.navigation.navigate('Chat', { courseId, className });
   }
 
   navigateToSetting = () => {
@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   titleText: {
+    color: '#000',
     fontFamily : 'Roboto-Bold',
     fontSize: 40,
     marginBottom: 30,
