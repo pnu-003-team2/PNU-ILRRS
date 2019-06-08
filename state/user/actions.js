@@ -2,6 +2,7 @@ import {
   USER_DATA_REQUEST,
   USER_DATA_SUCCESS,
   USER_DATA_FAILURE,
+  USER_DATA_UPDATE,
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAILURE,
@@ -28,6 +29,13 @@ export function loadUserFailure(error) {
     type: USER_DATA_FAILURE,
     payload: error,
     error: true,
+  };
+}
+
+export function updateUserData(user) {
+  return {
+    type: USER_DATA_UPDATE,
+    payload: user,
   };
 }
 

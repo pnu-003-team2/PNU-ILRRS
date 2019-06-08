@@ -8,6 +8,9 @@ import {
   SENDBIRD_DISCONNECT_REQUEST,
   SENDBIRD_DISCONNECT_SUCCESS,
   SENDBIRD_DISCONNECT_FAILURE,
+  SENDBIRD_PROFILE_CHANGE_REQUEST,
+  SENDBIRD_PROFILE_CHANGE_SUCCESS,
+  SENDBIRD_PROFILE_CHANGE_FAILURE,
 } from '../action-types';
 import {
   getSendbirdAccessToken,
@@ -94,6 +97,29 @@ export function fetchChannelSuccess(courseId, channel) {
 export function fetchChannelFailure(error) {
   return {
     type: SENDBIRD_CHANNEL_FETCH_FAILURE,
+    payload: error,
+    error: true,
+  };
+}
+
+export function changeProfileRequest(nickname, file) {
+  return {
+    type: SENDBIRD_PROFILE_CHANGE_REQUEST,
+    file,
+    nickname,
+  };
+}
+
+export function changeProfileSuccess(payload) {
+  return {
+    type: SENDBIRD_PROFILE_CHANGE_SUCCESS,
+    payload,
+  };
+}
+
+export function changeProfileFailure(error) {
+  return {
+    type: SENDBIRD_PROFILE_CHANGE_FAILURE,
     payload: error,
     error: true,
   };
