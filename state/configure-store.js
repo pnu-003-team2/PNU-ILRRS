@@ -6,6 +6,7 @@ import {
   sendbirdChannelMiddleware,
   sendbirdConnectionMiddleware,
   sendbirdDisconnectionMiddleware,
+  sendbirdProfileMiddleware,
 } from './sendbird/middlewares';
 
 function configureStore() {
@@ -13,6 +14,7 @@ function configureStore() {
     sendbirdChannelMiddleware,
     sendbirdConnectionMiddleware,
     sendbirdDisconnectionMiddleware,
+    sendbirdProfileMiddleware,
     thunk,
   ];
 

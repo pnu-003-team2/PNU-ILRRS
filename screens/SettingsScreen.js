@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
   Image,
   StyleSheet,
@@ -7,16 +8,37 @@ import {
   View,
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
+import PropTypes from 'prop-types';
 import AsyncStorage from '@react-native-community/async-storage';
 
-export default class SettingsScreen extends React.Component {
+import {
+  changeProfileRequest,
+} from '../state/sendbird/actions';
+import {
+  getName,
+  getProfileUrl,
+  getUserId,
+} from '../state/user/selectors';
+
+const propTypes = {
+  avatarSource : PropTypes.string,
+  userName : PropTypes.string,
+  userNumber : PropTypes.string,
+  onProfileChange: PropTypes.func,
+};
+
+const defaultProps = {
+  avatarSource : 'https://bootdey.com/img/Content/avatar/avatar6.png',
+  userName : '',
+  userNumber : '',
+  onProfileChange() {},
+};
+
+class SettingsScreen extends React.Component {
+
   static navigationOptions = {
     title: '설정',
     headerTintColor: 'black',
-  };
-
-  state = {
-    avatarSource: null,
   };
 
   selectPhotoTapped = () => {
@@ -39,12 +61,20 @@ export default class SettingsScreen extends React.Component {
       } else if (response.customButton) {
         console.log('User tapped custom button: ', response.customButton);
       } else {
-        let source = { uri: response.uri };
-        // You can also display the image using data:
-        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-        this.setState({
-          avatarSource: source,
-        });
+        const { userName, onProfileChange } = this.props;
+        const url = `data:${response.type};base64,${response.data}`;
+
+        fetch(url)
+          .then(res => res.blob())
+          .then(blob => {
+            const file = new window.File([blob], 'profile', {
+              type: response.type,
+              lastModified: new Date(),
+            });
+            console.log(blob);
+            console.log(file);
+            onProfileChange(userName, blob);
+          });
       }
     });
   }
@@ -54,41 +84,31 @@ export default class SettingsScreen extends React.Component {
     this.props.navigation.navigate('Auth');
   }
 
+  getProfileSource() {
+    return this.props.avatarSource || 'https://bootdey.com/img/Content/avatar/avatar6.png';
+  }
+
   render() {
-    const { avatarSource } = this.state;
     return (
       <View style={styles.container}>
           <View style={styles.header}>
-            <TouchableOpacity activeOpacity={0.5}>
-              {avatarSource ? (
-                <Image
-                  style={styles.avatar}
-                  source={this.state.avatarSource}
-                />
-              ) : (
-                <Image
-                  style={styles.avatar}
-                  source={{ uri: 'https://bootdey.com/img/Content/avatar/avatar6.png' }}
-                />
-              )}
+            <TouchableOpacity activeOpacity={0.5} style={styles.avatarframe} onPress={this.selectPhotoTapped} >
+              <Image
+                style={styles.avatar}
+                source={{uri: this.getProfileSource()}}
+              />
             </TouchableOpacity>
           </View>
           <View style={styles.body}>
             <View style={styles.bodyContent}>
-              <Text style={styles.name}>Deok Hyeon</Text>
-              <Text style={styles.info}>UX Designer / Mobile developer</Text>
+              <Text style={styles.name}>{this.props.userName}</Text>
+              <Text style={styles.info}>{this.props.userNumber}</Text>
               <Text style={styles.description}>Computer Engineering</Text>
               <TouchableOpacity
                 style={styles.buttonContainer}
                 onPress={this.signOut}
               >
                 <Text>Logout</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.buttonContainer}
-                onPress={this.selectPhotoTapped}
-              >
-                <Text>Image Change</Text>
               </TouchableOpacity>
             </View>
         </View>
@@ -97,21 +117,31 @@ export default class SettingsScreen extends React.Component {
   }
 }
 
+SettingsScreen.propTypes = propTypes;
+SettingsScreen.defaultProps = defaultProps;
+
 const styles = StyleSheet.create({
   header: {
     backgroundColor: '#00BFFF',
     height:200,
   },
-  avatar: {
+  avatarframe: {
     width: 130,
     height: 130,
     borderRadius: 63,
     borderWidth: 4,
     borderColor: 'white',
-    marginBottom:10,
+    marginBottom: 10,
+    alignSelf: 'center',
+    marginTop: 130,
+
+  },
+  avatar: {
+    width: 124,
+    height: 124,
+    borderRadius: 63,
+    borderWidth: 3,
     alignSelf:'center',
-    position: 'absolute',
-    marginTop:130,
   },
   body: {
     marginTop:40,
@@ -138,7 +168,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   buttonContainer: {
-    marginTop:10,
+    marginTop:100,
     height:45,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -148,3 +178,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#00BFFF',
   },
 });
+
+const mapStateToProps = state => ({
+  avatarSource: getProfileUrl(state),
+  userName: getName(state),
+  userNumber: getUserId(state),
+});
+
+const mapDispatchToProps = {
+  onProfileChange: changeProfileRequest,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen);

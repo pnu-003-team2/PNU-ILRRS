@@ -2,6 +2,7 @@ import {
   USER_DATA_REQUEST,
   USER_DATA_SUCCESS,
   USER_DATA_FAILURE,
+  USER_DATA_UPDATE,
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAILURE,
@@ -25,6 +26,12 @@ export default function reducer(state = {}, action) {
       return {
         ...state,
         isUserDataLoading: false,
+      };
+    case USER_DATA_UPDATE:
+      return {
+        ...state,
+        name: action.payload.nickname,
+        profileUrl: action.payload.profileUrl,
       };
     case USER_LOGIN_REQUEST:
       return {

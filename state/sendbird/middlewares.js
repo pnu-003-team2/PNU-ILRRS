@@ -5,6 +5,7 @@ import {
   SENDBIRD_CHANNEL_FETCH_REQUEST,
   SENDBIRD_CONNECT_REQUEST,
   SENDBIRD_DISCONNECT_REQUEST,
+  SENDBIRD_PROFILE_CHANGE_REQUEST,
 } from '../action-types';
 import {
   connectSendbirdSuccess,
@@ -13,7 +14,10 @@ import {
   disconnectSendbirdFailure,
   fetchChannelSuccess,
   fetchChannelFailure,
+  changeProfileSuccess,
+  changeProfileFailure,
 } from './actions';
+import { updateUserData } from '../user/actions';
 
 const sb = new SendBird({ appId: SENDBIRD_APP_ID });
 
@@ -30,6 +34,7 @@ export const sendbirdConnectionMiddleware = () => next => (action) => {
       next(connectSendbirdFailure(error));
     } else {
       next(connectSendbirdSuccess(user));
+      next(updateUserData(user));
     }
   });
 };
@@ -63,6 +68,25 @@ export const sendbirdDisconnectionMiddleware = () => next => (action) => {
       next(disconnectSendbirdFailure(error));
     } else {
       next(disconnectSendbirdSuccess());
+    }
+  });
+};
+
+export const sendbirdProfileMiddleware = () => next => (action) => {
+  if (action.type !== SENDBIRD_PROFILE_CHANGE_REQUEST) {
+    return next(action);
+  }
+
+  next(action);
+
+  const { nickname, file } = action;
+
+  sb.updateCurrentUserInfoWithProfileImage(nickname, file, (response, error) => {
+    if (error) {
+      next(changeProfileFailure(error));
+    } else {
+      next(changeProfileSuccess(response));
+      next(updateUserData(response));
     }
   });
 };
