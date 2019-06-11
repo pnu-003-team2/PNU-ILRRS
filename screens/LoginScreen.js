@@ -37,10 +37,9 @@ class LoginScreen extends React.Component {
       await AsyncStorage.setItem('userToken', token);
       this.props.navigation.navigate('Main');
     } catch (error) {
-      const message = error.message || '잠시 후 다시 시도해주세요.';
+      const message = '학번과 비밀번호를 올바르게 입력해 주세요 크흠...';
       Alert.alert('로그인 실패', message, [
-        { text: 'Cancel', style: 'cancel' },
-        { text: 'OK' },
+        { text: '확인' },
       ],
       { cancelable: false });
     }
@@ -83,6 +82,7 @@ class LoginScreen extends React.Component {
             <AirbnbTextInput
               placeholder="학번"
               isSecured={false}
+              keyboardIsNumberType={true}
               value={this.state.studentId}
               onChangeText={this.handleStudentIdChange}
             />
@@ -90,6 +90,7 @@ class LoginScreen extends React.Component {
             <AirbnbTextInput
               placeholder="비밀번호"
               isSecured={true}
+              keyboardIsNumberType={false}
               value={this.state.password}
               onChangeText={this.handlePasswordChange}
             />
