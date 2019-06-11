@@ -1,6 +1,7 @@
 import React from 'react';
+import { StyleSheet, View, Text } from 'react-native';
 import PropTypes from 'prop-types';
-import { GiftedChat } from 'react-native-gifted-chat';
+import { GiftedChat, Avatar } from 'react-native-gifted-chat';
 import { connect } from 'react-redux';
 import SendBird from 'sendbird';
 
@@ -108,10 +109,23 @@ class Chat extends React.Component {
     }
   }
 
+  renderCustomAvatar = (avatarProps) => {
+    console.log(avatarProps);
+    return (
+      <View style={styles.avatarContainer}>
+        <Avatar {...avatarProps} />
+        <Text style={styles.name}>{avatarProps.currentMessage.user.name}</Text>
+      </View>
+    );
+  }
+
   render() {
     const { user } = this.props;
     return (
       <GiftedChat
+        placeholder="메시지를 입력하세요"
+        renderAvatarOnTop={true}
+        renderAvatar={this.renderCustomAvatar}
         textInputProps={{autoFocus: true}}
         messages={this.state.messages}
         onLoadEarlier={this.fetchPreviousMessages}
@@ -127,6 +141,20 @@ class Chat extends React.Component {
 
 Chat.propTypes = propTypes;
 Chat.defaultProps = defaultProps;
+
+const styles = StyleSheet.create({
+  avatarContainer: {
+
+  },
+  name: {
+    width: 36,
+    marginTop: 5,
+    fontSize: 11,
+    fontFamily: 'Roboto-Regular',
+    color: '#3d3d3d',
+    textAlign: 'center',
+  },
+});
 
 const mapStateToProps = (state, props) => ({
   channel: getCourseChannel(state, props),
