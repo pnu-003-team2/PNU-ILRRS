@@ -77,7 +77,7 @@ class SettingsScreen extends React.Component {
   }
 
   goOpenSourceScreen = () => {
-
+    this.props.navigation.navigate('License');
   }
 
   signOut = async () => {

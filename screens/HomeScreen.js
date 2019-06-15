@@ -11,6 +11,7 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 class HomeScreen extends React.Component {
 
   static navigationOptions = {
+    title: '강의목록',
     header: null,
   };
 
