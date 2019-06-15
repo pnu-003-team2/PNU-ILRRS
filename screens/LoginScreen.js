@@ -37,7 +37,7 @@ class LoginScreen extends React.Component {
       await AsyncStorage.setItem('userToken', token);
       this.props.navigation.navigate('Main');
     } catch (error) {
-      const message = '학번과 비밀번호를 올바르게 입력해 주세요 크흠...';
+      const message = '학번과 비밀번호를 올바르게 입력해 주세요.';
       Alert.alert('로그인 실패', message, [
         { text: '확인' },
       ],
