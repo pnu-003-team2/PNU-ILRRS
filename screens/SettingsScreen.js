@@ -6,10 +6,12 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ScrollView,
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import PropTypes from 'prop-types';
 import AsyncStorage from '@react-native-community/async-storage';
+import { SafeAreaView } from 'react-navigation';
 
 import {
   changeProfileRequest,
@@ -74,6 +76,10 @@ class SettingsScreen extends React.Component {
     });
   }
 
+  goOpenSourceScreen = () => {
+
+  }
+
   signOut = async () => {
     await AsyncStorage.removeItem('userToken');
     this.props.navigation.navigate('Auth');
@@ -85,29 +91,37 @@ class SettingsScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-          <View style={styles.header}>
+      <SafeAreaView style={styles.conatiner}>
+        <ScrollView style={styles.scrollView}>
+
+          <View style={styles.profileContainer}>
             <TouchableOpacity activeOpacity={0.5} style={styles.avatarframe} onPress={this.selectPhotoTapped} >
               <Image
                 style={styles.avatar}
                 source={{uri: this.getProfileSource()}}
               />
             </TouchableOpacity>
-          </View>
-          <View style={styles.body}>
-            <View style={styles.bodyContent}>
+
+            <View style={styles.informationContainer}>
               <Text style={styles.name}>{this.props.userName}</Text>
-              <Text style={styles.info}>{this.props.userNumber}</Text>
-              <Text style={styles.description}>Computer Engineering</Text>
-              <TouchableOpacity
-                style={styles.buttonContainer}
-                onPress={this.signOut}
-              >
-                <Text>Logout</Text>
-              </TouchableOpacity>
+              <Text style={styles.studentNumb}>{this.props.userNumber}</Text>
             </View>
-        </View>
-      </View>
+          </View>
+
+          <TouchableOpacity onPress={this.goOpenSourceScreen}>
+            <View style={styles.openSourceContainer}>
+              <Text style={styles.openSource}>오픈소스 라이선스</Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={this.signOut}>
+            <View style={styles.logoutContainer}>
+              <Text style={styles.logout}>로그아웃</Text>
+            </View>
+          </TouchableOpacity>
+
+        </ScrollView>
+      </SafeAreaView>
     );
   }
 }
@@ -116,61 +130,59 @@ SettingsScreen.propTypes = propTypes;
 SettingsScreen.defaultProps = defaultProps;
 
 const styles = StyleSheet.create({
-  header: {
-    backgroundColor: '#00BFFF',
-    height:200,
+  conatiner: {
+    flex: 1,
   },
-  avatarframe: {
-    width: 130,
-    height: 130,
-    borderRadius: 63,
-    borderWidth: 4,
-    borderColor: 'white',
-    marginBottom: 10,
-    alignSelf: 'center',
-    marginTop: 130,
-
+  scrollView: {
+    flex: 1,
+  },
+  profileContainer: {
+    paddingVertical: 30,
+    paddingHorizontal: 20,
+    flexDirection: 'row',
+    borderBottomWidth: 0.3,
+    borderColor: '#cecece',
   },
   avatar: {
-    width: 124,
-    height: 124,
-    borderRadius: 63,
-    borderWidth: 3,
-    alignSelf:'center',
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    borderWidth: 0.5,
+    borderColor: '#b5b5b5',
   },
-  body: {
-    marginTop:40,
-  },
-  bodyContent: {
-    flex: 1,
-    alignItems: 'center',
-    padding:30,
+  informationContainer: {
+    paddingTop: 15,
+    marginLeft: 25,
+    flexDirection: 'column',
   },
   name: {
-    fontSize:28,
-    color: '#696969',
-    fontWeight: '600',
+    fontSize: 21,
+    fontFamily: 'Roboto-Regular',
+    color: '#383838',
   },
-  info: {
-    fontSize:16,
-    color: '#00BFFF',
-    marginTop:10,
+  studentNumb: {
+    marginTop: 5,
+    fontSize: 19,
+    fontFamily: 'Roboto-Regular',
+    color: '#383838',
   },
-  description: {
-    fontSize:16,
-    color: '#696969',
-    marginTop:10,
-    textAlign: 'center',
+  openSourceContainer: {
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    borderBottomWidth: 0.3,
+    borderColor: '#cecece',
   },
-  buttonContainer: {
-    marginTop:100,
-    height:45,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom:20,
-    width:350,
-    backgroundColor: '#00BFFF',
+  openSource: {
+    fontSize: 15,
+  },
+  logoutContainer: {
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    borderBottomWidth: 0.3,
+    borderColor: '#cecece',
+  },
+  logout: {
+    fontSize: 15,
   },
 });
 
