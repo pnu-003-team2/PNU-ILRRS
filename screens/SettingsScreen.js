@@ -67,13 +67,8 @@ class SettingsScreen extends React.Component {
         fetch(url)
           .then(res => res.blob())
           .then(blob => {
-            const file = new window.File([blob], 'profile', {
-              type: response.type,
-              lastModified: new Date(),
-            });
-            console.log(blob);
-            console.log(file);
-            onProfileChange(userName, blob);
+            const objectUrl = window.URL.createObjectURL(blob);
+            onProfileChange(userName, objectUrl);
           });
       }
     });

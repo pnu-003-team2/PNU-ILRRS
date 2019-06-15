@@ -81,7 +81,7 @@ export const sendbirdProfileMiddleware = () => next => (action) => {
 
   const { nickname, file } = action;
 
-  sb.updateCurrentUserInfoWithProfileImage(nickname, file, (response, error) => {
+  sb.updateCurrentUserInfo(nickname, file, (response, error) => {
     if (error) {
       next(changeProfileFailure(error));
     } else {
